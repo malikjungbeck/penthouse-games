@@ -132,13 +132,15 @@
   // Texte, die im HTML durch Formatierungs-Spans zerstückelt sind — per DOM ersetzen.
   var TEXT_PATCHES = [
     ['No fucks given',
-     'Willkommen im MMS® Club: Penthouse Games. Zieh dir was Schickes an, aber komm nicht mit Stock im Arsch. Rock einfach einen coolen Fit — bitte kein Dreiteiler, aber auch nicht im Wife-Beater. Chic, aber casual. Black and/or white.'],
+     'Zieh dir was Schickes an, aber lass den Dreiteiler zu Hause. Ziel sollte es sein, dass du mit einem coolen Fit kommst: schick, aber casual. Anbei ein paar Fotos als Inspiration für dein Outfit und den Mood des Abends.'],
     ['Nach dem Kauf kommt dein personalisierter',
-     'Nach dem Kauf kommt dein personalisierter Invite mit allen wichtigen Infos per Post. Außerdem erhältst du deine MMS® Club Card. Sie ist dein Einlass zum Event und mit ihr sammelst du Punkte, um dir die MMS® Club Preise zu erspielen.'],
+     'Nach dem Kauf kommt dein personalisiertes Ticket mit allen wichtigen Infos per Post. Außerdem erhältst du deine MMS® Club Card. Sie ist dein Einlass zum Event und mit ihr sammelst du Punkte, um dir die MMS® Club Preise zu erspielen.'],
     ['tryzuharden',
-     'Black and/or white, chic aber casual. Kein Dreiteiler, kein Wife-Beater, kein Stock im Arsch. Orientier dich am Moodboard — Sport-Club Mood, aber in einem Penthouse.'],
+     'Black and/or white, chic aber casual. Lass den Dreiteiler zu Hause und orientier dich am Moodboard — Sport-Club Mood, aber in einem Penthouse.'],
     ['verrückte MMS® Club Merch',
-     'Am 29.08.2026 ist es endlich soweit: Das erste MMS® Club Event. Wir bringen die MMS® Community an einem Ort zusammen: Freut euch auf die MMS® Penthouse Games, verrückte MMS® Club Preise, die MMS® Awardzeremonie und unsere Community Spendenaktion.']
+     'Am 29.08.2026 ist es endlich soweit: Das erste MMS® Club Event. Wir bringen die MMS® Community an einem Ort zusammen: Freut euch auf die MMS® Penthouse Games, verrückte MMS® Club Preise, die MMS® Awardzeremonie und unsere Community Spendenaktion.'],
+    ['Zeit, sie endlich an einem Ort',
+     'Die MMS® Community ist über Socials, Calls und Chats gewachsen. Jetzt ist es an der Zeit, sie endlich an einem Ort zusammenzubringen.']
   ];
   document.querySelectorAll('.con-kit-quark').forEach(function (q) {
     TEXT_PATCHES.forEach(function (p) {
@@ -222,7 +224,7 @@
     var locRow = inviteRow.cloneNode(true);
     locRow.removeAttribute('data-id');
     var locQuark = locRow.querySelector('.con-kit-quark');
-    if (locQuark) locQuark.textContent = 'Location? Wird im Invite revealed. Hint: Das Event heißt Penthouse Games.';
+    if (locQuark) locQuark.textContent = 'Die Location ist eine Überraschung und wird in der Einladung verraten. Kleiner Hint: Das Event heißt Penthouse Games.';
     lastChkLine.parentElement.insertBefore(locLine, lastChkLine);
     lastChkLine.parentElement.insertBefore(locRow, lastChkLine);
   }
