@@ -136,7 +136,7 @@
     ['verrückte MMS® Club Merch',
      'Endlich ist es soweit: Das erste MMS® Club Event. Die Community wächst wie verrückt und wir sind täglich online im Austausch über Socials, Chats und Calls. Jetzt ist es an der Zeit, endlich uns alle in Person an einem Ort zusammenzubringen.\n\nMach dich bereit für einen geilen Abend, um dich mit Menschen wie dir zu connecten, das MMS® Team in Person kennenzulernen, eine gute Zeit zu haben und gemeinsam dumm zu gehen.'],
     ['Chats gewachsen. Zeit, sie endlich',
-     'Egal, wer bei den Games gewinnt, am Ende gewinnt die Community. Echte Gespräche, neue Kontakte und ein Abend, der in Erinnerung bleibt.']
+     'An alle, die innerhalb der MMS®-Betreuung erstmals 10.000, 100.000 oder 1.000.000 € erreicht haben: Bei diesem Fest übergeben wir die ersten MMS® Awards jemals.']
   ];
   document.querySelectorAll('.con-kit-quark').forEach(function (q) {
     TEXT_PATCHES.some(function (p) {
@@ -368,9 +368,7 @@
   }
 
   // ==== "MMS® always wins.": mobil Founders-Foto oben statt Rooftop ====
-  var roofAtom = document.querySelector('[data-id^="612a43b4"]');
   var foundersImg = document.querySelector('[data-id^="ca294597"]');
-  if (roofAtom) roofAtom.classList.add('pg-hide-mobile');
   if (foundersImg) {
     var foundersCol = foundersImg.closest('.con-kit-col');
     if (foundersCol) foundersCol.classList.add('pg-first-mobile');
