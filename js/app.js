@@ -134,7 +134,7 @@
     ['tryzuharden',
      'Kein Dreiteiler, kein Wife-Beater — du musst auch nicht im Jackett kommen. Zieh dir aber was Schickes an und orientier dich gern am Moodboard: Sport-Club Mood, aber in einem Penthouse. Die meisten von uns kommen mit Hemd oder T-Shirt und Anzughose — dazu Sneaker oder Loafer.'],
     ['verrückte MMS® Club Merch',
-     'Endlich ist es soweit: Das erste MMS® Club Event. Die Community wächst wie verrückt und wir sind täglich online im Austausch über Socials, Chats und Calls. Jetzt ist es an der Zeit, uns alle endlich in Person an einem Ort zusammenzubringen. Mach dich bereit für einen geilen Abend, um dich mit Menschen wie dir zu connecten, das MMS® Team persönlich kennenzulernen, eine gute Zeit zu haben und gemeinsam dumm zu gehen.'],
+     'Endlich ist es soweit: Das erste MMS® Club Event. Die Community wächst wie verrückt und wir sind täglich online im Austausch über Socials, Chats und Calls. Jetzt ist es an der Zeit, endlich uns alle in Person an einem Ort zusammenzubringen.\n\nMach dich bereit für einen geilen Abend, um dich mit Menschen wie dir zu connecten, das MMS® Team in Person kennenzulernen, eine gute Zeit zu haben und gemeinsam dumm zu gehen.'],
     ['Chats gewachsen. Zeit, sie endlich',
      'Egal, wer bei den Games gewinnt, am Ende gewinnt die Community. Echte Gespräche, neue Kontakte und ein Abend, der in Erinnerung bleibt.']
   ];
@@ -142,13 +142,23 @@
     TEXT_PATCHES.some(function (p) {
       if (q.textContent.indexOf(p[0]) === -1) return false;
       // Farb-Span erhalten (traegt --alpha-text 0.5) — sonst wird der Text vollweiss
+      var setText = function (ziel, text) {
+        ziel.textContent = '';
+        text.split('\n\n').forEach(function (teil, ti) {
+          if (ti > 0) {
+            ziel.appendChild(document.createElement('br'));
+            ziel.appendChild(document.createElement('br'));
+          }
+          ziel.appendChild(document.createTextNode(teil));
+        });
+      };
       var colorSpan = q.querySelector('span.con-kit-quark-color');
       if (colorSpan) {
-        colorSpan.textContent = p[1];
+        setText(colorSpan, p[1]);
         q.innerHTML = '';
         q.appendChild(colorSpan);
       } else {
-        q.textContent = p[1];
+        setText(q, p[1]);
       }
       return true;
     });
