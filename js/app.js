@@ -285,6 +285,10 @@
         a: 'Um Anreise und Hotel kümmerst du dich selbst. Das Event geht bis ca. 3 Uhr nachts — eine Übernachtung in München lohnt sich also. Los geht\'s pünktlich um 17 Uhr, danach geht\'s in die Nacht: Jeder bleibt so lange, wie er will.' },
       { q: 'Was, wenn ich doch nicht kann?',
         a: 'Das Ticket ist nicht übertragbar und wird nicht erstattet — die Teilnahmegebühr ist ja gespendet. Gib uns trotzdem kurz Bescheid, damit wir planen können.' },
+      { q: 'Wen darf ich als +1 mitbringen?',
+        a: 'Wen du willst! Jeder Kunde hat die Möglichkeit, zusätzliche Tickets zu kaufen — seid ihr zu zweit, dürft ihr auch gerne zwei Leute mitbringen.' },
+      { q: 'Bis wann kann ich Tickets kaufen?',
+        a: 'Es gibt keine Deadline — first come, first serve. Wenn die 100 Tickets weg sind, sind sie weg.' },
       { q: 'Wird gefilmt?',
         a: 'Ja. Wir produzieren ein Aftermovie, das rund drei Wochen nach dem Event erscheint. Wer nicht da war, sieht dort genau, was er verpasst hat. Also: Komm auf jeden Fall!' }
     ];
