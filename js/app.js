@@ -100,13 +100,9 @@
     var fold = document.createElement('div');
     fold.className = 'pg-fold';
     fold.setAttribute('data-pg-reveal', '');
-    var seatsText = SEATS_LEFT != null
-      ? 'Noch ' + SEATS_LEFT + ' von ' + SEATS_TOTAL + ' Plätzen'
-      : 'Limitiert auf ' + SEATS_TOTAL + ' Plätze';
     fold.innerHTML =
       '<div class="pg-countdown" id="pg-countdown"></div>' +
-      '<a class="pg-fold__cta" href="' + TICKET_URL + '" target="_blank" rel="noopener">Jetzt Ticket sichern</a>' +
-      '<div class="pg-fold__seats">' + seatsText + '</div>';
+      '<a class="pg-fold__cta" href="' + TICKET_URL + '" target="_blank" rel="noopener">Jetzt Ticket sichern</a>';
     deckImage.parentNode.insertBefore(fold, deckImage.nextSibling);
   }
 
