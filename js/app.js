@@ -341,6 +341,16 @@
     if (awardMolecule) awardMolecule.classList.add('pg-award-mobile-last');
   }
 
+  // Footer: "always wins" wird zum Mission-Statement
+  var footerAlways = Array.prototype.find.call(
+    document.querySelectorAll('section.fußzeile .con-kit-component-button__label, section.fußzeile .con-kit-quark'),
+    function (el) { return el.textContent.trim() === 'always wins'; }
+  );
+  if (footerAlways) {
+    footerAlways.textContent = 'Always wins: Wir wollen als Team gewinnen. Das Team, das sind wir, du und alle anderen unserer Kunden. Unsere Mission ist es, den maximalen Mehrwert und die geilste Community in Deutschland aufzubauen.';
+    footerAlways.classList.add('pg-footer-mission');
+  }
+
   // ==== Logo-Marquee: nahtloser Loop ====
   // Die Runtime würde das __repeat-Element befüllen — ohne sie bleibt es leer
   // und es entsteht eine riesige Lücke. Wir klonen den Logosatz selbst, bis die

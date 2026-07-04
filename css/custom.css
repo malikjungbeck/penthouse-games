@@ -592,3 +592,12 @@ section.hero [data-id^="b70aa9aa"] {
     width: auto !important;
   }
 }
+
+/* Footer-Mission: mehrzeiliger Text statt Einzeiler */
+.pg-footer-mission {
+  white-space: normal !important;
+  text-align: left !important;
+  max-width: 480px;
+  line-height: 1.6 !important;
+  display: block;
+}
