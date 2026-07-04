@@ -134,13 +134,13 @@
     ['tryzuharden',
      'Kein Dreiteiler, kein Wife-Beater — du musst auch nicht im Jackett kommen. Zieh dir aber was Schickes an und orientier dich gern am Moodboard: Sport-Club Mood, aber in einem Penthouse. Die meisten von uns kommen mit Hemd oder T-Shirt und Anzughose — dazu Sneaker oder Loafer.'],
     ['verrückte MMS® Club Merch',
-     'Am 29.08.2026 ist es endlich soweit: Das erste MMS® Club Event. Wir bringen die MMS® Community an einem Ort zusammen: Freut euch auf die MMS® Penthouse Games, verrückte MMS® Club Preise, die MMS® Awardzeremonie und unsere Community Spendenaktion.'],
-    ['Zeit, sie endlich an einem Ort',
-     'Die MMS® Community ist über Socials, Calls und Chats gewachsen. Jetzt ist es an der Zeit, sie endlich an einem Ort zusammenzubringen.']
+     'Endlich ist es soweit: Das erste MMS® Club Event. Die MMS® Community ist über Socials, Calls und Chats gewachsen. Jetzt ist es an der Zeit, sie endlich an einem Ort zusammenzubringen. Freu dich auf einen geilen Abend, um mit anderen Selbstständigen & Unternehmern zu connecten, eine gute Zeit zu haben und gemeinsam dumm zu gehen.'],
+    ['Chats gewachsen. Zeit, sie endlich',
+     'Egal, wer bei den Games gewinnt — am Ende gewinnt die Community: echte Gespräche, neue Kontakte und ein Abend, der in Erinnerung bleibt.']
   ];
   document.querySelectorAll('.con-kit-quark').forEach(function (q) {
-    TEXT_PATCHES.forEach(function (p) {
-      if (q.textContent.indexOf(p[0]) === -1) return;
+    TEXT_PATCHES.some(function (p) {
+      if (q.textContent.indexOf(p[0]) === -1) return false;
       // Farb-Span erhalten (traegt --alpha-text 0.5) — sonst wird der Text vollweiss
       var colorSpan = q.querySelector('span.con-kit-quark-color');
       if (colorSpan) {
@@ -150,6 +150,7 @@
       } else {
         q.textContent = p[1];
       }
+      return true;
     });
   });
 
