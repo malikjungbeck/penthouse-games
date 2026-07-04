@@ -426,6 +426,22 @@ a.pg-award-textlink,
   .con-kit-component-spacer__handler {
     max-height: 64px !important;
   }
+  /* Kachel-Rhythmus vereinheitlichen (64px zwischen den Blöcken) —
+     Nahtstellen der Kachel-Rotation ausgleichen */
+  section.hero [data-id^="e2443c07"] {
+    margin-top: 30px !important; /* vor "MMS® Club Preise": 34 -> 64 */
+  }
+  section.hero [data-id^="9971eeae"] {
+    margin-top: 54px !important; /* vor "MMS® Awardzeremonie": 10 -> 64 */
+  }
+  section.hero [data-id^="8e6b1eeb"] .con-kit-component-spacer,
+  section.hero [data-id^="8e6b1eeb"] .con-kit-component-spacer__handler {
+    max-height: 40px !important; /* nach "Award beantragen": 88 -> 64 */
+  }
+  section.hero [data-id^="b70aa9aa"] .con-kit-component-spacer,
+  section.hero [data-id^="b70aa9aa"] .con-kit-component-spacer__handler {
+    max-height: 8px !important; /* nach dem Abend-CTA: 105 -> ~64 */
+  }
   /* Sektions-Paddings mobil kompakter und einheitlich */
   section[data-kit-organism-padding="xxl"] .con-kit-frame {
     padding-top: 96px !important;
