@@ -274,7 +274,7 @@
     var locRow = inviteRow.cloneNode(true);
     locRow.removeAttribute('data-id');
     var locQuark = locRow.querySelector('.con-kit-quark');
-    if (locQuark) locQuark.textContent = 'Was wir nicht wollen: dreckige Jogginghose — aber auch kein Dreiteiler';
+    if (locQuark) locQuark.textContent = 'Was wir nicht wollen: dreckige Jogginghosen — aber auch keine Dreiteiler';
     lastChkLine.parentElement.insertBefore(locLine, lastChkLine);
     lastChkLine.parentElement.insertBefore(locRow, lastChkLine);
   }

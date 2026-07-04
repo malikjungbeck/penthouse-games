@@ -573,3 +573,8 @@ section.slider- .con-kit-frame {
 section.timeline .pg-tl-last .con-kit-component-grid-timeline__icon::after {
   display: none !important;
 }
+
+/* "Das erwartet dich": Ticket-Button raus (CTA-Dichte reduzieren) */
+section.hero [data-id^="b70aa9aa"] {
+  display: none !important;
+}
