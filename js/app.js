@@ -170,6 +170,21 @@
     awardZiel.appendChild(awardFormLink);
   }
 
+  // Vierte Fakt-Zeile: "Limitiert auf 100 Tickets."
+  var exAtom = document.querySelector('.con-kit-animation__atom[data-id^="ab4cc4d8"]');
+  var exLine = document.querySelector('.con-kit-animation__atom[data-id^="fb45a2da"]');
+  if (exAtom && exLine && exLine.parentElement) {
+    var fakt4 = exAtom.cloneNode(true);
+    fakt4.removeAttribute('data-id');
+    var fakt4Q = fakt4.querySelector('.con-kit-quark');
+    if (fakt4Q) fakt4Q.textContent = 'Limitiert auf 100 Tickets.';
+    var fakt4Line = exLine.cloneNode(true);
+    fakt4Line.removeAttribute('data-id');
+    var nachLine = exLine.nextElementSibling;
+    exLine.parentElement.insertBefore(fakt4, nachLine);
+    exLine.parentElement.insertBefore(fakt4Line, nachLine);
+  }
+
   // A3: Untere Kachel-Reihe wird [Food & Drinks | MMS® Club Preise | Dummgehen].
   // Jede Spalte ist eine Atom-Liste [oben-Titel, oben-Text, unten-Titel, unten-Text] —
   // die unteren Kachel-Atome rotieren eine Spalte weiter.
@@ -293,6 +308,13 @@
     });
   });
 
+  // Award-Spalte (Preise + Awardzeremonie + Link) mobil als letzter Block
+  var preiseAtom = document.querySelector('section.hero .con-kit-animation__atom[data-id^="e2443c07"]');
+  if (preiseAtom) {
+    var awardMolecule = preiseAtom.closest('.con-kit-molecule-textBlock');
+    if (awardMolecule) awardMolecule.classList.add('pg-award-mobile-last');
+  }
+
   // ==== Logo-Marquee: nahtloser Loop ====
   // Die Runtime würde das __repeat-Element befüllen — ohne sie bleibt es leer
   // und es entsteht eine riesige Lücke. Wir klonen den Logosatz selbst, bis die
@@ -391,7 +413,8 @@
       if (tlContainer) {
         var tr = tlContainer.getBoundingClientRect();
         var tp = Math.min(1, Math.max(0, (vh * 0.7 - tr.top) / tr.height));
-        tlContainer.style.setProperty('--pg-progress', tp.toFixed(3));
+        var tlLine = tlContainer.querySelector('.pg-timeline-line');
+        if (tlLine && tlLineMaxPx) tlLine.style.height = Math.round(tp * tlLineMaxPx) + 'px';
       }
       ticking = false;
     });
@@ -399,6 +422,7 @@
 
   // ==== Timeline Progress-Linie ====
   // Läuft von der Mitte des ersten Icons bis zur Mitte des letzten — hinter den Icon-Boxen.
+  var tlLineMaxPx = 0;
   var tlContainer = document.querySelector('.con-kit-component-grid-timeline__container');
   if (tlContainer) {
     var line = document.createElement('div');
@@ -411,8 +435,8 @@
       var cRect = tlContainer.getBoundingClientRect();
       var first = iconBoxes[0].getBoundingClientRect();
       var last = iconBoxes[iconBoxes.length - 1].getBoundingClientRect();
-      line.style.setProperty('--pg-line-top', Math.round(first.top + first.height / 2 - cRect.top) + 'px');
-      line.style.setProperty('--pg-line-max', Math.round((last.top + last.height / 2) - (first.top + first.height / 2)) + 'px');
+      line.style.top = Math.round(first.top + first.height / 2 - cRect.top) + 'px';
+      tlLineMaxPx = Math.round((last.top + last.height / 2) - (first.top + first.height / 2));
     };
     sizeTimelineLine();
     window.addEventListener('load', sizeTimelineLine);

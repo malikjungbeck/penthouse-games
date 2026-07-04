@@ -548,3 +548,10 @@ section.timeline .con-kit-component-icon__border {
 .pg-faq-link:hover {
   color: #fff;
 }
+
+/* Award-Block (Preise + Awardzeremonie + Link) mobil als letzter Kachel-Block */
+@media (max-width: 640px) {
+  .pg-award-mobile-last {
+    order: 9;
+  }
+}
