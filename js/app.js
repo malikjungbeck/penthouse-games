@@ -140,20 +140,6 @@
     setInterval(render, 1000);
   }
 
-  // ==== Mood: Checkliste + CTA in die linke Spalte unter den Text ====
-  // (Galerien bleiben rechts; nur Linien, Checklist-Zeilen und Button ziehen um)
-  // Spalten über Inhalt finden — es gibt eine leere Spalte, die --first UND --last ist
-  var moodCols = Array.prototype.slice.call(document.querySelectorAll('section.mood .con-kit-col'));
-  var moodLeftCol = moodCols.find(function (c) { return c.textContent.indexOf('Chic, but') !== -1; });
-  var moodRight = moodCols.find(function (c) { return c.textContent.indexOf('Connecte dich') !== -1; });
-  var moodLeft = moodLeftCol && moodLeftCol.querySelector('.con-kit-component-atom-list');
-  if (moodLeft && moodRight) {
-    ['b27ba295', 'af4b4149', '79dd9320', '5133c8f8', '4676d0d3', 'c27f5290'].forEach(function (prefix) {
-      var atom = moodRight.querySelector('.con-kit-animation__atom[data-id^="' + prefix + '"]');
-      if (atom) moodLeft.appendChild(atom);
-    });
-  }
-
   // ==== Inhalts-Patches (Änderungspaket 04.07.2026) ====
   // Texte, die im HTML durch Formatierungs-Spans zerstückelt sind — per DOM ersetzen.
   var TEXT_PATCHES = [
@@ -281,6 +267,32 @@
     });
   }
 
+  // ==== Logo-Marquee: nahtloser Loop ====
+  // Die Runtime würde das __repeat-Element befüllen — ohne sie bleibt es leer
+  // und es entsteht eine riesige Lücke. Wir klonen den Logosatz selbst, bis die
+  // Laufbahn gefüllt ist, und verschieben pro Zyklus exakt eine Satzbreite.
+  var mqTrack = document.querySelector('.con-kit-component-marquee__content');
+  if (mqTrack) {
+    var mqGallery = mqTrack.querySelector('.con-kit-component-marquee-gallery');
+    var mqBand = mqTrack.closest('.con-kit-component-marquee');
+    var setupMarquee = function () {
+      if (!mqGallery || !mqBand) return;
+      var setW = mqGallery.getBoundingClientRect().width;
+      if (setW < 10) { setTimeout(setupMarquee, 400); return; }
+      var kopien = Math.max(2, Math.ceil((mqBand.getBoundingClientRect().width * 2) / setW) + 1);
+      for (var i = 0; i < kopien; i++) {
+        var klon = mqGallery.cloneNode(true);
+        klon.setAttribute('aria-hidden', 'true');
+        mqTrack.appendChild(klon);
+      }
+      mqTrack.style.setProperty('--pg-mq-shift', -Math.round(setW) + 'px');
+      mqTrack.style.setProperty('--pg-mq-dauer', Math.max(10, Math.round(setW / 45)) + 's');
+      mqTrack.classList.add('pg-marquee-loop');
+    };
+    if (document.readyState === 'complete') setupMarquee();
+    else window.addEventListener('load', setupMarquee);
+  }
+
   // ==== "MMS® always wins.": mobil Founders-Foto oben statt Rooftop ====
   var roofAtom = document.querySelector('[data-id^="612a43b4"]');
   var foundersImg = document.querySelector('[data-id^="ca294597"]');
@@ -353,12 +365,6 @@
     line.className = 'pg-timeline-line';
     tlContainer.style.setProperty('--pg-progress', '0');
     tlContainer.appendChild(line);
-    // Linke Einträge rechtsbündig an die Linie rücken
-    var tlLineX = line.getBoundingClientRect().left;
-    document.querySelectorAll('section.timeline .con-kit-molecule-textBlock').forEach(function (m) {
-      var r = m.getBoundingClientRect();
-      if (r.width > 0 && r.right < tlLineX + 10) m.classList.add('pg-tl-left');
-    });
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });

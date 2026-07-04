@@ -54,13 +54,6 @@ section.deckblatt .con-kit-frame {
   padding-bottom: 64px !important;
 }
 
-/* Mood-Section: umgezogene Checkliste (siehe app.js) mit Abstand zum Text.
-   Das erste Line-Atom ist "pull-down" (margin-top:auto) — hart überschreiben,
-   sonst rutscht die Checkliste ans Spaltenende. */
-section.mood [data-id^="b27ba295"] {
-  margin-top: 48px !important;
-}
-
 /* ---------- Film-Grain + Vignette ---------- */
 .pg-grain {
   position: fixed;
@@ -322,14 +315,6 @@ a.pg-award-textlink,
   transition: transform 300ms var(--pg-ease);
 }
 
-/* ---------- Timeline: linke Einträge rechtsbündig zur Linie ---------- */
-@media (min-width: 641px) {
-  .pg-tl-left,
-  .pg-tl-left .con-kit-quark {
-    text-align: right !important;
-  }
-}
-
 /* ---------- Masonry / Galerie Hover ---------- */
 .con-kit-component-masonry img,
 .con-kit-component-marquee img {
@@ -406,10 +391,19 @@ a.pg-award-textlink,
   }
 }
 
-/* ---------- Logo-Marquee: Laufzeit setzen (Onepage-Runtime fehlt) ---------- */
-.con-kit-component-marquee__content {
-  --marquee-speed: 30s;
-  animation-duration: 30s !important;
+/* ---------- Logo-Marquee: nahtloser Loop (Onepage-Runtime fehlt) ----------
+   app.js klont den Logosatz, bis die Laufbahn gefüllt ist, und verschiebt
+   pro Zyklus exakt eine Satzbreite — dadurch läuft es endlos durch. */
+@keyframes pg-marquee {
+  to { transform: translateX(var(--pg-mq-shift, -100%)); }
+}
+.pg-marquee-loop {
+  display: flex !important;
+  width: max-content !important;
+  animation: pg-marquee var(--pg-mq-dauer, 20s) linear infinite !important;
+}
+.pg-marquee-loop .con-kit-component-marquee__repeat {
+  display: none !important; /* leeres Runtime-Duplikat */
 }
 
 /* ---------- Mobile: einheitliche Abstände ---------- */
