@@ -555,3 +555,15 @@ section.timeline .con-kit-component-icon__border {
     order: 9;
   }
 }
+
+/* Abstand zwischen "always wins" und Timeline halbiert (war 249px) */
+section.slider- .con-kit-frame {
+  padding-bottom: 124px !important;
+}
+
+/* Founders-Foto mobil: sauberer Abstand zur Headline (klebte auf 0px) */
+@media (max-width: 640px) {
+  .pg-first-mobile {
+    margin-bottom: 28px;
+  }
+}
