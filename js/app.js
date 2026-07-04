@@ -281,6 +281,15 @@
     });
   }
 
+  // ==== "MMS® always wins.": mobil Founders-Foto oben statt Rooftop ====
+  var roofAtom = document.querySelector('[data-id^="612a43b4"]');
+  var foundersImg = document.querySelector('[data-id^="ca294597"]');
+  if (roofAtom) roofAtom.classList.add('pg-hide-mobile');
+  if (foundersImg) {
+    var foundersCol = foundersImg.closest('.con-kit-col');
+    if (foundersCol) foundersCol.classList.add('pg-first-mobile');
+  }
+
   // ==== Scroll-Reveals (gestaffelt, scroll-basiert — robust ohne IO) ====
   document.querySelectorAll('.con-kit-animation__atom, .con-kit-component-list-item-accordion').forEach(function (el) {
     el.setAttribute('data-pg-reveal', '');

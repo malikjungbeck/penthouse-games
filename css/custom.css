@@ -414,6 +414,14 @@ a.pg-award-textlink,
 
 /* ---------- Mobile: einheitliche Abstände ---------- */
 @media (max-width: 640px) {
+  /* "MMS® always wins.": Rooftop-Bild mobil ausblenden,
+     Founders-Foto (Malik & Jakob) nach oben */
+  .pg-hide-mobile {
+    display: none !important;
+  }
+  .pg-first-mobile {
+    order: -1;
+  }
   /* Kachel-Atome nicht auf Desktop-Höhen strecken */
   section.hero .con-kit-molecule-textBlock .con-kit-animation__atom {
     height: auto !important;
