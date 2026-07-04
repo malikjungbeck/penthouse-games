@@ -120,6 +120,20 @@
     setInterval(render, 1000);
   }
 
+  // ==== Mood: Checkliste + CTA in die linke Spalte unter den Text ====
+  // (Galerien bleiben rechts; nur Linien, Checklist-Zeilen und Button ziehen um)
+  // Spalten über Inhalt finden — es gibt eine leere Spalte, die --first UND --last ist
+  var moodCols = Array.prototype.slice.call(document.querySelectorAll('section.mood .con-kit-col'));
+  var moodLeftCol = moodCols.find(function (c) { return c.textContent.indexOf('Chic, but') !== -1; });
+  var moodRight = moodCols.find(function (c) { return c.textContent.indexOf('Connecte dich') !== -1; });
+  var moodLeft = moodLeftCol && moodLeftCol.querySelector('.con-kit-component-atom-list');
+  if (moodLeft && moodRight) {
+    ['b27ba295', 'af4b4149', '79dd9320', '5133c8f8', '4676d0d3', 'c27f5290'].forEach(function (prefix) {
+      var atom = moodRight.querySelector('.con-kit-animation__atom[data-id^="' + prefix + '"]');
+      if (atom) moodLeft.appendChild(atom);
+    });
+  }
+
   // ==== Serif-Akzente auf Eyebrow-Zeilen (explizite Whitelist) ====
   var SERIF_LINES = ['Was dich erwartet', 'Mood', 'Exklusiv für MMS® Kunden:'];
   document.querySelectorAll('.con-kit-atom-plain-text .con-kit-quark').forEach(function (el) {

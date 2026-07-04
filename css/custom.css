@@ -40,6 +40,29 @@ body {
   text-align: center !important;
 }
 
+/* Hero-Inhalt vertikal mittig im Viewport statt am unteren Rand:
+   unsichtbaren 243px-Füller einklappen und Section flex-zentrieren */
+section.deckblatt {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+section.deckblatt [data-atom="line"] {
+  display: none !important; /* beide unsichtbaren Pull-down-Füller */
+}
+section.deckblatt .con-kit-frame {
+  padding-top: 12px !important; /* statt 201px — Flex zentriert den Rest */
+  padding-bottom: 64px !important;
+}
+
+/* Mood-Section: umgezogene Checkliste (siehe app.js) mit Abstand zum Text.
+   Das erste Line-Atom ist "pull-down" (margin-top:auto) — hart überschreiben,
+   sonst rutscht die Checkliste ans Spaltenende. */
+section.mood [data-id^="b27ba295"] {
+  margin-top: 48px !important;
+}
+
 /* ---------- Film-Grain + Vignette ---------- */
 .pg-grain {
   position: fixed;
