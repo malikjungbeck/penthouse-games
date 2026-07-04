@@ -276,13 +276,6 @@
     });
   }
 
-  // ==== Serif-Akzente auf Eyebrow-Zeilen (explizite Whitelist) ====
-  var SERIF_LINES = ['Was dich erwartet', 'Mood', 'Exklusiv für MMS® Kunden:'];
-  document.querySelectorAll('.con-kit-atom-plain-text .con-kit-quark').forEach(function (el) {
-    var t = (el.textContent || '').trim();
-    if (SERIF_LINES.indexOf(t) !== -1) el.classList.add('pg-serif');
-  });
-
   // ==== Scroll-Reveals (gestaffelt, scroll-basiert — robust ohne IO) ====
   document.querySelectorAll('.con-kit-animation__atom, .con-kit-component-list-item-accordion').forEach(function (el) {
     el.setAttribute('data-pg-reveal', '');
