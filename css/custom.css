@@ -67,29 +67,24 @@ body {
 }
 
 /* ---------- Deckblatt-Video: weich nach unten auslaufen ----------
-   Geeaste Kurve statt linearem Verlauf, damit kein Banding/Kante entsteht. */
-.deckblatt .con-kit-organism-background {
-  -webkit-mask-image: linear-gradient(
+   Schwarzer Verlauf ÜBER dem Video statt Transparenz-Maske — es wird
+   nichts freigelegt (kein Weiß moeglich), nur Schwarz daruebergelegt. */
+.deckblatt .con-kit-organism-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
     to bottom,
-    #000 0%,
-    #000 42%,
-    rgba(0, 0, 0, 0.87) 56%,
-    rgba(0, 0, 0, 0.62) 67%,
-    rgba(0, 0, 0, 0.36) 76%,
-    rgba(0, 0, 0, 0.16) 84%,
-    rgba(0, 0, 0, 0.05) 91%,
-    transparent 97%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    #000 42%,
-    rgba(0, 0, 0, 0.87) 56%,
-    rgba(0, 0, 0, 0.62) 67%,
-    rgba(0, 0, 0, 0.36) 76%,
-    rgba(0, 0, 0, 0.16) 84%,
-    rgba(0, 0, 0, 0.05) 91%,
-    transparent 97%
+    rgba(13, 13, 13, 0) 0%,
+    rgba(13, 13, 13, 0) 42%,
+    rgba(13, 13, 13, 0.13) 56%,
+    rgba(13, 13, 13, 0.38) 67%,
+    rgba(13, 13, 13, 0.64) 76%,
+    rgba(13, 13, 13, 0.84) 84%,
+    rgba(13, 13, 13, 0.95) 91%,
+    #0d0d0d 97%
   );
 }
 
