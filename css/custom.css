@@ -11,6 +11,17 @@
   --pg-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
 }
 
+/* Schwarze Grundfarbe überall — keine weißen Blitzer durch Masken,
+   Video-Ladezustände oder verschobene Ebenen */
+html,
+body {
+  background-color: #0d0d0d !important;
+}
+.deckblatt .con-kit-organism-background,
+.pg-bg-video {
+  background-color: #0d0d0d;
+}
+
 /* Nur das Window scrollt — verhindert Doppel-Scroll/Leerraum nach dem Footer (Safari)
    und horizontale Scrollbalken durch überbreite Original-Layouts */
 @supports (overflow: clip) {

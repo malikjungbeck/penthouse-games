@@ -126,6 +126,9 @@
   // ==== Parallax auf Organism-Backgrounds ====
   var pxLayers = [];
   document.querySelectorAll('.parallax-banner-layer-0').forEach(function (layer) {
+    // Nur Ebenen mit echtem Bild/Video bewegen — verschobene Farbflächen
+    // würden den (hellen) Seitenhintergrund freilegen.
+    if (!layer.querySelector('img, video')) return;
     var section = layer.closest('section');
     if (section) pxLayers.push({ layer: layer, section: section });
   });
