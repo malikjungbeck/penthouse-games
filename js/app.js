@@ -254,7 +254,7 @@
     var locRow = inviteRow.cloneNode(true);
     locRow.removeAttribute('data-id');
     var locQuark = locRow.querySelector('.con-kit-quark');
-    if (locQuark) locQuark.textContent = 'Die Location ist eine Überraschung und wird in der Einladung verraten. Kleiner Hint: Das Event heißt Penthouse Games.';
+    if (locQuark) locQuark.textContent = 'Was wir nicht wollen: dreckige Jogginghose — aber auch kein Dreiteiler';
     lastChkLine.parentElement.insertBefore(locLine, lastChkLine);
     lastChkLine.parentElement.insertBefore(locRow, lastChkLine);
   }
@@ -453,6 +453,7 @@
     // sonst bleibt er dauerhaft auf opacity 0
     afterItem.classList.add('pg-in');
     afterItem.querySelectorAll('[data-pg-reveal]').forEach(function (n) { n.classList.add('pg-in'); });
+    afterItem.classList.add('pg-tl-last');
     // Vor der Progress-Linie einfuegen -> 4. Item, Zickzack bleibt (links)
     var tlLineEl = tlItems[2].parentElement.querySelector('.pg-timeline-line');
     tlItems[2].parentElement.insertBefore(afterItem, tlLineEl);

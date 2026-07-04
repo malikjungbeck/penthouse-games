@@ -567,3 +567,9 @@ section.slider- .con-kit-frame {
     margin-bottom: 28px;
   }
 }
+
+/* Graues Verbindungssegment NACH dem letzten Timeline-Icon entfernen —
+   die Linie endet am vierten Icon */
+section.timeline .pg-tl-last .con-kit-component-grid-timeline__icon::after {
+  display: none !important;
+}
