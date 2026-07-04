@@ -134,6 +134,99 @@
     });
   }
 
+  // ==== Inhalts-Patches (Änderungspaket 04.07.2026) ====
+  // Texte, die im HTML durch Formatierungs-Spans zerstückelt sind — per DOM ersetzen.
+  var TEXT_PATCHES = [
+    ['No fucks given',
+     'Willkommen im MMS® Club: Penthouse Games. Zieh dir was Schickes an, aber komm nicht mit Stock im Arsch. Rock einfach einen coolen Fit — bitte kein Dreiteiler, aber auch nicht im Wife-Beater. Chic, aber casual. Black and/or white.'],
+    ['Nach dem Kauf kommt dein personalisierter',
+     'Nach dem Kauf kommt dein personalisierter Invite mit allen wichtigen Infos per Post. Außerdem erhältst du deine MMS® Club Card. Sie ist dein Einlass zum Event und mit ihr sammelst du Punkte, um dir die MMS® Club Preise zu erspielen.'],
+    ['tryzuharden',
+     'Black and/or white, chic aber casual. Kein Dreiteiler, kein Wife-Beater, kein Stock im Arsch. Orientier dich am Moodboard — Sport-Club Mood, aber in einem Penthouse.']
+  ];
+  document.querySelectorAll('.con-kit-quark').forEach(function (q) {
+    TEXT_PATCHES.forEach(function (p) {
+      if (q.textContent.indexOf(p[0]) !== -1) q.textContent = p[1];
+    });
+  });
+
+  // A3: Untere Kachel-Reihe wird [Food & Drinks | MMS® Club Preise | Dummgehen].
+  // Jede Spalte ist eine Atom-Liste [oben-Titel, oben-Text, unten-Titel, unten-Text] —
+  // die unteren Kachel-Atome rotieren eine Spalte weiter.
+  (function () {
+    var ids = { dummgehen: '2bdd698b', fd: '51dc1656', preise: 'e2443c07' };
+    var atom = function (p) { return document.querySelector('section.hero .con-kit-animation__atom[data-id^="' + p + '"]'); };
+    var d = atom(ids.dummgehen), f = atom(ids.fd), p = atom(ids.preise);
+    if (!d || !f || !p) return;
+    var listOf = function (a) { return a.parentElement; };
+    var col1 = listOf(d), col2 = listOf(f), col3 = listOf(p);
+    var moveTile = function (headerAtom, targetList) {
+      var textAtom = headerAtom.nextElementSibling;
+      targetList.appendChild(headerAtom);
+      if (textAtom) targetList.appendChild(textAtom);
+    };
+    moveTile(f, col1); // Food & Drinks nach Spalte 1 unten
+    moveTile(p, col2); // Preise nach Spalte 2 unten
+    moveTile(d, col3); // Dummgehen nach Spalte 3 unten (Abschluss)
+  })();
+
+  // A4: Award-Button wird dezenter Textlink
+  document.querySelectorAll('.con-kit-component-button').forEach(function (b) {
+    if (b.textContent.indexOf('Award jetzt beantragen') === -1) return;
+    var label = b.querySelector('.con-kit-component-button__label');
+    if (label) label.textContent = 'Award beantragen';
+    (b.closest('a') || b).classList.add('pg-award-textlink');
+    b.classList.add('pg-award-textlink');
+  });
+
+  // A6b: Location-Hint als dritte Checklisten-Zeile (nach dem Mood-Umzug oben)
+  var inviteRow = document.querySelector('section.mood [data-id^="5133c8f8"]');
+  var lastChkLine = document.querySelector('section.mood [data-id^="4676d0d3"]');
+  if (inviteRow && lastChkLine && lastChkLine.parentElement) {
+    var locLine = lastChkLine.cloneNode(true);
+    locLine.removeAttribute('data-id');
+    var locRow = inviteRow.cloneNode(true);
+    locRow.removeAttribute('data-id');
+    var locQuark = locRow.querySelector('.con-kit-quark');
+    if (locQuark) locQuark.textContent = 'Location? Wird im Invite revealed. Hint: Das Event heißt Penthouse Games.';
+    lastChkLine.parentElement.insertBefore(locLine, lastChkLine);
+    lastChkLine.parentElement.insertBefore(locRow, lastChkLine);
+  }
+
+  // B: Neue FAQ-Einträge (geklont vom ersten Accordion-Item)
+  var faqTemplate = document.querySelector('section.faq .con-kit-component-list-item-accordion');
+  if (faqTemplate) {
+    var faqParent = faqTemplate.parentElement;
+    var NEW_FAQS = [
+      { q: 'Was sind die Penthouse Games genau?',
+        a: 'Die Penthouse Games sind unser Tournament über den gesamten Abend. Du sammelst Punkte, verbindest dich nebenbei mit anderen Kunden und erspielst dir MMS® Club Preise. Kein Leistungsdruck — die Games sind dafür da, dass man leicht in den Abend reinkommt.',
+        first: true },
+      { q: 'Was ist die MMS® Club Card?',
+        a: 'Dein personalisiertes Invite, das per Post zu dir nach Hause kommt. Die physische MMS® Club Card ist dein Einlass zum Event — und damit sammelst du bei den Penthouse Games deine Punkte.' },
+      { q: 'Wie läuft Anreise und Übernachtung?',
+        a: 'Um Anreise und Hotel kümmerst du dich selbst. Das Event geht bis ca. 3 Uhr nachts — eine Übernachtung in München lohnt sich also. Los geht\'s pünktlich um 17 Uhr, danach geht\'s in die Nacht: Jeder bleibt so lange, wie er will.' },
+      { q: 'Was, wenn ich doch nicht kann?',
+        a: 'Das Ticket ist nicht übertragbar und wird nicht erstattet — die Teilnahmegebühr ist ja gespendet. Gib uns trotzdem kurz Bescheid, damit wir planen können.' },
+      { q: 'Wird gefilmt?',
+        a: 'Ja. Wir produzieren ein Aftermovie, das rund drei Wochen nach dem Event erscheint. Wer nicht da war, sieht dort, was er verpasst hat.' }
+    ];
+    NEW_FAQS.forEach(function (f) {
+      var item = faqTemplate.cloneNode(true);
+      item.classList.remove('con-kit-component-list-item-accordion--open');
+      item.removeAttribute('data-list-item-index');
+      item.querySelectorAll('[id]').forEach(function (n) { n.removeAttribute('id'); });
+      var headQ = item.querySelector('.con-kit-component-list-item-accordion__head .con-kit-quark');
+      if (headQ) headQ.textContent = f.q;
+      var bodyQs = item.querySelectorAll('.con-kit-component-list-item-accordion__body .con-kit-quark');
+      bodyQs.forEach(function (bq, i) {
+        if (i === 0) bq.textContent = f.a;
+        else bq.remove();
+      });
+      if (f.first) faqParent.insertBefore(item, faqTemplate);
+      else faqParent.appendChild(item);
+    });
+  }
+
   // ==== Serif-Akzente auf Eyebrow-Zeilen (explizite Whitelist) ====
   var SERIF_LINES = ['Was dich erwartet', 'Mood', 'Exklusiv für MMS® Kunden:'];
   document.querySelectorAll('.con-kit-atom-plain-text .con-kit-quark').forEach(function (el) {
