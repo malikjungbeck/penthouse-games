@@ -58,18 +58,6 @@
     setTimeout(hide, 3200); // Fail-safe: nie länger blockieren
   }
 
-  // ==== FAQ / Listen-Accordions ====
-  document.querySelectorAll('.con-kit-component-list-item-accordion').forEach(function (item) {
-    var head = item.querySelector('.con-kit-component-list-item-accordion__head') || item;
-    var body = item.querySelector('.con-kit-component-list-item-accordion__body');
-    if (!body) return;
-    body.style.height = '0px';
-    head.addEventListener('click', function () {
-      var open = item.classList.toggle('con-kit-component-list-item-accordion--open');
-      body.style.height = open ? body.scrollHeight + 'px' : '0px';
-    });
-  });
-
   // ==== Hero: Script-Logo exakt in die Bildschirmmitte setzen ====
   var heroFrame = document.querySelector('section.deckblatt .con-kit-frame');
   var centerHeroLogo = function () {
@@ -148,7 +136,9 @@
     ['Nach dem Kauf kommt dein personalisierter',
      'Nach dem Kauf kommt dein personalisierter Invite mit allen wichtigen Infos per Post. Außerdem erhältst du deine MMS® Club Card. Sie ist dein Einlass zum Event und mit ihr sammelst du Punkte, um dir die MMS® Club Preise zu erspielen.'],
     ['tryzuharden',
-     'Black and/or white, chic aber casual. Kein Dreiteiler, kein Wife-Beater, kein Stock im Arsch. Orientier dich am Moodboard — Sport-Club Mood, aber in einem Penthouse.']
+     'Black and/or white, chic aber casual. Kein Dreiteiler, kein Wife-Beater, kein Stock im Arsch. Orientier dich am Moodboard — Sport-Club Mood, aber in einem Penthouse.'],
+    ['verrückte MMS® Club Merch',
+     'Am 29.08.2026 ist es endlich soweit: Das erste MMS® Club Event. Wir bringen die MMS® Community an einem Ort zusammen: Freut euch auf die MMS® Penthouse Games, verrückte MMS® Club Preise, die MMS® Awardzeremonie und unsere Community Spendenaktion.']
   ];
   document.querySelectorAll('.con-kit-quark').forEach(function (q) {
     TEXT_PATCHES.forEach(function (p) {
@@ -275,6 +265,18 @@
       else faqParent.appendChild(wrapper);
     });
   }
+
+  // ==== FAQ / Listen-Accordions (NACH dem Klonen initialisieren!) ====
+  document.querySelectorAll('.con-kit-component-list-item-accordion').forEach(function (item) {
+    var head = item.querySelector('.con-kit-component-list-item-accordion__head') || item;
+    var body = item.querySelector('.con-kit-component-list-item-accordion__body');
+    if (!body) return;
+    body.style.height = '0px';
+    head.addEventListener('click', function () {
+      var open = item.classList.toggle('con-kit-component-list-item-accordion--open');
+      body.style.height = open ? body.scrollHeight + 'px' : '0px';
+    });
+  });
 
   // ==== Logo-Marquee: nahtloser Loop ====
   // Die Runtime würde das __repeat-Element befüllen — ohne sie bleibt es leer

@@ -530,3 +530,11 @@ section.timeline .con-kit-component-icon__border {
     rgba(0, 0, 0, 0.35) 100%
   );
 }
+
+/* Sektions-Intro-Texte im einheitlichen Grau (nicht Vollweiss) */
+[data-block-key="gjYO4KHQYD"],
+[data-block-key="gjYO4KHQYD"] span,
+[data-block-key="vqHiZpUg5D"],
+[data-block-key="vqHiZpUg5D"] span {
+  color: rgba(255, 255, 255, 0.68) !important;
+}
