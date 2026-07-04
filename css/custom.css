@@ -601,3 +601,8 @@ section.hero [data-id^="b70aa9aa"] {
   line-height: 1.6 !important;
   display: block;
 }
+
+/* Award-Bild aus der Mood-Galerie entfernt — es lebt jetzt gross in der Awardzeremonie-Sektion */
+section.mood [data-id^="cb12c019"] {
+  display: none !important;
+}
