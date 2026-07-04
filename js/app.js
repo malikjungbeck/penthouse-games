@@ -134,7 +134,7 @@
     ['tryzuharden',
      'Kein Dreiteiler, kein Wife-Beater — du musst auch nicht im Jackett kommen. Zieh dir aber was Schickes an und orientier dich gern am Moodboard: Sport-Club Mood, aber in einem Penthouse. Die meisten von uns kommen mit Hemd oder T-Shirt und Anzughose — dazu Sneaker oder Loafer.'],
     ['verrückte MMS® Club Merch',
-     'Endlich ist es soweit: Das erste MMS® Club Event. Die MMS® Community ist auf über 300 Leute gewachsen. Wir haben uns online kennengelernt und sind täglich im Austausch über Chats und Calls. Jetzt ist es an der Zeit, uns endlich an einem Ort zusammenzubringen. Mach dich bereit für einen geilen Abend, um dich mit Menschen wie dir zu connecten, eine gute Zeit zu haben und gemeinsam dumm zu gehen. Wir freuen uns, euch endlich alle in Person kennenzulernen!'],
+     'Endlich ist es soweit: Das erste MMS® Club Event. Die Community wächst wie verrückt und wir sind täglich online im Austausch über Socials, Chats und Calls. Jetzt ist es an der Zeit, uns alle endlich in Person an einem Ort zusammenzubringen. Mach dich bereit für einen geilen Abend, um dich mit Menschen wie dir zu connecten, das MMS® Team persönlich kennenzulernen, eine gute Zeit zu haben und gemeinsam dumm zu gehen.'],
     ['Chats gewachsen. Zeit, sie endlich',
      'Egal, wer bei den Games gewinnt, am Ende gewinnt die Community. Echte Gespräche, neue Kontakte und ein Abend, der in Erinnerung bleibt.']
   ];
