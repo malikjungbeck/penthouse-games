@@ -15,11 +15,11 @@
    Video-Ladezustände oder verschobene Ebenen */
 html,
 body {
-  background-color: #0d0d0d !important;
+  background-color: #000 !important;
 }
 .deckblatt .con-kit-organism-background,
 .pg-bg-video {
-  background-color: #0d0d0d;
+  background-color: #000;
 }
 
 /* Nur das Window scrollt — verhindert Doppel-Scroll/Leerraum nach dem Footer (Safari)
@@ -77,14 +77,14 @@ body {
   pointer-events: none;
   background: linear-gradient(
     to bottom,
-    rgba(13, 13, 13, 0) 0%,
-    rgba(13, 13, 13, 0) 42%,
-    rgba(13, 13, 13, 0.13) 56%,
-    rgba(13, 13, 13, 0.38) 67%,
-    rgba(13, 13, 13, 0.64) 76%,
-    rgba(13, 13, 13, 0.84) 84%,
-    rgba(13, 13, 13, 0.95) 91%,
-    #0d0d0d 97%
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 42%,
+    rgba(0, 0, 0, 0.13) 56%,
+    rgba(0, 0, 0, 0.38) 67%,
+    rgba(0, 0, 0, 0.64) 76%,
+    rgba(0, 0, 0, 0.84) 84%,
+    rgba(0, 0, 0, 0.95) 91%,
+    #000 97%
   );
 }
 
@@ -93,7 +93,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 999999;
-  background: #0d0d0d;
+  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -250,7 +250,7 @@ html.pg-js .deckblatt [data-atom="image"].pg-in img {
 }
 .pg-fold__cta:hover {
   background: #fff;
-  color: #0d0d0d;
+  color: #000;
 }
 
 /* ---------- Button-Glint (bestehende CTAs) ---------- */
