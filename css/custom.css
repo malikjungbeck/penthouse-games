@@ -414,6 +414,39 @@ a.pg-award-textlink,
   }
 }
 
+/* ---------- Logo-Marquee: Laufzeit setzen (Onepage-Runtime fehlt) ---------- */
+.con-kit-component-marquee__content {
+  --marquee-speed: 30s;
+  animation-duration: 30s !important;
+}
+
+/* ---------- Mobile: einheitliche Abstände ---------- */
+@media (max-width: 640px) {
+  /* Kachel-Atome nicht auf Desktop-Höhen strecken */
+  section.hero .con-kit-molecule-textBlock .con-kit-animation__atom {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  /* Desktop-Ausrichtungs-Spacer mobil kappen (sonst 180px+ Löcher) */
+  .con-kit-component-spacer,
+  .con-kit-component-spacer__handler {
+    max-height: 64px !important;
+  }
+  /* Sektions-Paddings mobil kompakter und einheitlich */
+  section[data-kit-organism-padding="xxl"] .con-kit-frame {
+    padding-top: 96px !important;
+    padding-bottom: 96px !important;
+  }
+  section[data-kit-organism-padding="l"] .con-kit-frame {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
+  section[data-kit-organism-padding="m"] .con-kit-frame {
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
+}
+
 /* ---------- Reduced Motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html.pg-js [data-pg-reveal] {
