@@ -538,3 +538,13 @@ section.timeline .con-kit-component-icon__border {
 [data-block-key="vqHiZpUg5D"] span {
   color: rgba(255, 255, 255, 0.68) !important;
 }
+
+/* Inline-Link in FAQ-Antworten */
+.pg-faq-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.pg-faq-link:hover {
+  color: #fff;
+}

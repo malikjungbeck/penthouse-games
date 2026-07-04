@@ -157,6 +157,23 @@
     });
   });
 
+  // Award-FAQ: "Sommerfest"-Relikt fixen + Formular-Link anhängen
+  var awardFaqQ = Array.prototype.find.call(document.querySelectorAll('.con-kit-quark'), function (q) {
+    return q.textContent.indexOf('Vorlaufzeit von mindestens 4 Wochen') !== -1;
+  });
+  if (awardFaqQ) {
+    var awardZiel = awardFaqQ.querySelector('span.con-kit-quark-color') || awardFaqQ;
+    awardZiel.textContent = awardZiel.textContent.replace('zum Sommerfest', 'zu den Penthouse Games');
+    var awardFormLink = document.createElement('a');
+    awardFormLink.href = 'https://form.typeform.com/to/ozsTWiw9';
+    awardFormLink.target = '_blank';
+    awardFormLink.rel = 'noopener';
+    awardFormLink.className = 'pg-faq-link';
+    awardFormLink.textContent = 'Hier kannst du einen Award beantragen, falls du dich qualifizierst.';
+    awardZiel.appendChild(document.createTextNode(' '));
+    awardZiel.appendChild(awardFormLink);
+  }
+
   // A3: Untere Kachel-Reihe wird [Food & Drinks | MMS® Club Preise | Dummgehen].
   // Jede Spalte ist eine Atom-Liste [oben-Titel, oben-Text, unten-Titel, unten-Text] —
   // die unteren Kachel-Atome rotieren eine Spalte weiter.
@@ -246,7 +263,7 @@
       { q: 'Was, wenn ich doch nicht kann?',
         a: 'Das Ticket ist nicht übertragbar und wird nicht erstattet — die Teilnahmegebühr ist ja gespendet. Gib uns trotzdem kurz Bescheid, damit wir planen können.' },
       { q: 'Wird gefilmt?',
-        a: 'Ja. Wir produzieren ein Aftermovie, das rund drei Wochen nach dem Event erscheint. Wer nicht da war, sieht dort, was er verpasst hat.' }
+        a: 'Ja. Wir produzieren ein Aftermovie, das rund drei Wochen nach dem Event erscheint. Wer nicht da war, sieht dort genau, was er verpasst hat. Also: Komm auf jeden Fall!' }
     ];
     NEW_FAQS.forEach(function (f) {
       var wrapper = faqTemplate.cloneNode(true);
