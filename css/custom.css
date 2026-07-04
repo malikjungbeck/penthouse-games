@@ -322,6 +322,14 @@ a.pg-award-textlink,
   transition: transform 300ms var(--pg-ease);
 }
 
+/* ---------- Timeline: linke Einträge rechtsbündig zur Linie ---------- */
+@media (min-width: 641px) {
+  .pg-tl-left,
+  .pg-tl-left .con-kit-quark {
+    text-align: right !important;
+  }
+}
+
 /* ---------- Masonry / Galerie Hover ---------- */
 .con-kit-component-masonry img,
 .con-kit-component-marquee img {

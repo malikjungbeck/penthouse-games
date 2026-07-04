@@ -74,16 +74,21 @@
   var heroFrame = document.querySelector('section.deckblatt .con-kit-frame');
   var centerHeroLogo = function () {
     if (!heroFrame) return;
-    heroFrame.style.setProperty('--pg-hero-pad', '12px');
     var img = document.querySelector('.deckblatt [data-atom="image"]');
     if (!img) return;
-    var r = img.getBoundingClientRect();
-    var currentCenter = r.top + window.scrollY + r.height / 2;
-    var pad = Math.max(12, Math.round(12 + window.innerHeight / 2 - currentCenter));
-    heroFrame.style.setProperty('--pg-hero-pad', pad + 'px');
+    // Iterativ vom aktuellen Padding aus korrigieren — selbstheilend,
+    // auch wenn sich das Layout nach dem ersten Durchlauf noch setzt.
+    for (var i = 0; i < 3; i++) {
+      var r = img.getBoundingClientRect();
+      var delta = Math.round(window.innerHeight / 2 - (r.top + window.scrollY + r.height / 2));
+      if (Math.abs(delta) < 2) break;
+      var current = parseFloat(heroFrame.style.getPropertyValue('--pg-hero-pad')) || 12;
+      heroFrame.style.setProperty('--pg-hero-pad', Math.max(12, current + delta) + 'px');
+    }
   };
   centerHeroLogo();
   window.addEventListener('load', centerHeroLogo);
+  window.addEventListener('load', function () { setTimeout(centerHeroLogo, 600); });
   var resizeTimer;
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
@@ -111,11 +116,6 @@
       ? 'Noch ' + SEATS_LEFT + ' von ' + SEATS_TOTAL + ' Plätzen'
       : 'Limitiert auf ' + SEATS_TOTAL + ' Plätze';
     fold.innerHTML =
-      '<div class="pg-fold__meta">' +
-        '<span>29/08/26</span><span class="pg-dot"></span>' +
-        '<span>München</span><span class="pg-dot"></span>' +
-        '<span>17:00 – 03:00</span>' +
-      '</div>' +
       '<div class="pg-countdown" id="pg-countdown"></div>' +
       '<a class="pg-fold__cta" href="' + TICKET_URL + '" target="_blank" rel="noopener">Jetzt Ticket sichern</a>' +
       '<div class="pg-fold__seats">' + seatsText + '</div>';
@@ -243,7 +243,9 @@
   }
 
   // B: Neue FAQ-Einträge (geklont vom ersten Accordion-Item)
-  var faqTemplate = document.querySelector('section.faq .con-kit-component-list-item-accordion');
+  // Geklont wird der grid-list-item-WRAPPER (eine Zeile), nicht das Accordion selbst
+  var faqFirstAcc = document.querySelector('section.faq .con-kit-component-list-item-accordion');
+  var faqTemplate = faqFirstAcc && faqFirstAcc.closest('.con-kit-component-grid-list-item');
   if (faqTemplate) {
     var faqParent = faqTemplate.parentElement;
     var NEW_FAQS = [
@@ -260,19 +262,22 @@
         a: 'Ja. Wir produzieren ein Aftermovie, das rund drei Wochen nach dem Event erscheint. Wer nicht da war, sieht dort, was er verpasst hat.' }
     ];
     NEW_FAQS.forEach(function (f) {
-      var item = faqTemplate.cloneNode(true);
-      item.classList.remove('con-kit-component-list-item-accordion--open');
-      item.removeAttribute('data-list-item-index');
-      item.querySelectorAll('[id]').forEach(function (n) { n.removeAttribute('id'); });
-      var headQ = item.querySelector('.con-kit-component-list-item-accordion__head .con-kit-quark');
+      var wrapper = faqTemplate.cloneNode(true);
+      wrapper.querySelectorAll('[id]').forEach(function (n) { n.removeAttribute('id'); });
+      var acc = wrapper.querySelector('.con-kit-component-list-item-accordion');
+      if (acc) {
+        acc.classList.remove('con-kit-component-list-item-accordion--open');
+        acc.removeAttribute('data-list-item-index');
+      }
+      var headQ = wrapper.querySelector('.con-kit-component-list-item-accordion__head .con-kit-quark');
       if (headQ) headQ.textContent = f.q;
-      var bodyQs = item.querySelectorAll('.con-kit-component-list-item-accordion__body .con-kit-quark');
+      var bodyQs = wrapper.querySelectorAll('.con-kit-component-list-item-accordion__body .con-kit-quark');
       bodyQs.forEach(function (bq, i) {
         if (i === 0) bq.textContent = f.a;
         else bq.remove();
       });
-      if (f.first) faqParent.insertBefore(item, faqTemplate);
-      else faqParent.appendChild(item);
+      if (f.first) faqParent.insertBefore(wrapper, faqTemplate);
+      else faqParent.appendChild(wrapper);
     });
   }
 
@@ -339,6 +344,12 @@
     line.className = 'pg-timeline-line';
     tlContainer.style.setProperty('--pg-progress', '0');
     tlContainer.appendChild(line);
+    // Linke Einträge rechtsbündig an die Linie rücken
+    var tlLineX = line.getBoundingClientRect().left;
+    document.querySelectorAll('section.timeline .con-kit-molecule-textBlock').forEach(function (m) {
+      var r = m.getBoundingClientRect();
+      if (r.width > 0 && r.right < tlLineX + 10) m.classList.add('pg-tl-left');
+    });
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
