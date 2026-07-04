@@ -70,6 +70,26 @@
     });
   });
 
+  // ==== Hero: Script-Logo exakt in die Bildschirmmitte setzen ====
+  var heroFrame = document.querySelector('section.deckblatt .con-kit-frame');
+  var centerHeroLogo = function () {
+    if (!heroFrame) return;
+    heroFrame.style.setProperty('--pg-hero-pad', '12px');
+    var img = document.querySelector('.deckblatt [data-atom="image"]');
+    if (!img) return;
+    var r = img.getBoundingClientRect();
+    var currentCenter = r.top + window.scrollY + r.height / 2;
+    var pad = Math.max(12, Math.round(12 + window.innerHeight / 2 - currentCenter));
+    heroFrame.style.setProperty('--pg-hero-pad', pad + 'px');
+  };
+  centerHeroLogo();
+  window.addEventListener('load', centerHeroLogo);
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(centerHeroLogo, 150);
+  });
+
   // ==== Sanftes Anker-Scrolling ====
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) {
@@ -168,6 +188,35 @@
     moveTile(f, col1); // Food & Drinks nach Spalte 1 unten
     moveTile(p, col2); // Preise nach Spalte 2 unten
     moveTile(d, col3); // Dummgehen nach Spalte 3 unten (Abschluss)
+    // Tausch: Awardzeremonie nach unten (letzter Punkt), Preise nach oben.
+    // Spalte 2 ist [Award, Award-Text, Link, Preise, Preise-Text] — Award-Trio ans Ende.
+    var award = document.querySelector('section.hero .con-kit-animation__atom[data-id^="9971eeae"]');
+    var awardLink = document.querySelector('section.hero .con-kit-animation__atom[data-id^="8e6b1eeb"]');
+    if (award && awardLink) {
+      var awardText = award.nextElementSibling;
+      col2.appendChild(award);
+      if (awardText) col2.appendChild(awardText);
+      col2.appendChild(awardLink);
+    }
+    // Untere Kachel-Köpfe auf eine Linie bringen (Top-Kacheln sind
+    // unterschiedlich hoch, sonst verrutscht die zweite Reihe)
+    var alignBottomRow = function () {
+      // untere Reihe nach dem Tausch: Food & Drinks | Awardzeremonie | Dummgehen
+      var heads = [d, f, award].filter(Boolean);
+      if (window.innerWidth <= 640) {
+        heads.forEach(function (h) { h.style.marginTop = ''; });
+        return;
+      }
+      heads.forEach(function (h) { h.style.marginTop = '0px'; });
+      var maxY = Math.max.apply(null, heads.map(function (h) { return h.getBoundingClientRect().top; }));
+      heads.forEach(function (h) {
+        var delta = Math.round(maxY - h.getBoundingClientRect().top);
+        if (delta > 1) h.style.marginTop = delta + 'px';
+      });
+    };
+    alignBottomRow();
+    window.addEventListener('load', alignBottomRow);
+    window.addEventListener('resize', function () { setTimeout(alignBottomRow, 200); });
   })();
 
   // A4: Award-Button wird dezenter Textlink
