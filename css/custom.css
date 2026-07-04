@@ -578,3 +578,17 @@ section.timeline .pg-tl-last .con-kit-component-grid-timeline__icon::after {
 section.hero [data-id^="b70aa9aa"] {
   display: none !important;
 }
+
+/* Footer-Button: eingefrorene Desktop-min-width (446px) verursacht bei
+   Zwischenbreiten Überlappungen mit den Link-Spalten */
+@media (max-width: 1100px) {
+  section.fußzeile [data-id^="e7ef0ef4"] {
+    --a-min-width: 0px !important;
+    min-width: 0 !important;
+    margin-top: 24px;
+  }
+  section.fußzeile [data-id^="e7ef0ef4"] .con-kit-component-button {
+    min-width: 0 !important;
+    width: auto !important;
+  }
+}
