@@ -136,7 +136,7 @@
     ['Nach dem Kauf kommt dein personalisierter',
      'Nach dem Kauf kommt dein personalisiertes Ticket mit allen wichtigen Infos per Post. Außerdem erhältst du deine MMS® Club Card. Sie ist dein Einlass zum Event und mit ihr sammelst du Punkte, um dir die MMS® Club Preise zu erspielen.'],
     ['tryzuharden',
-     'Black and/or white, chic aber casual. Lass den Dreiteiler zu Hause und orientier dich am Moodboard — Sport-Club Mood, aber in einem Penthouse.'],
+     'Kein Dreiteiler, kein Wife-Beater — du musst auch nicht im Jackett kommen. Zieh dir aber was Schickes an und orientier dich gern am Moodboard: Sport-Club Mood, aber in einem Penthouse. Die meisten von uns kommen mit Hemd oder T-Shirt und Anzughose — dazu Sneaker oder Loafer.'],
     ['verrückte MMS® Club Merch',
      'Am 29.08.2026 ist es endlich soweit: Das erste MMS® Club Event. Wir bringen die MMS® Community an einem Ort zusammen: Freut euch auf die MMS® Penthouse Games, verrückte MMS® Club Preise, die MMS® Awardzeremonie und unsere Community Spendenaktion.'],
     ['Zeit, sie endlich an einem Ort',
@@ -237,7 +237,7 @@
     var faqParent = faqTemplate.parentElement;
     var NEW_FAQS = [
       { q: 'Was sind die Penthouse Games genau?',
-        a: 'Die Penthouse Games sind unser Tournament über den gesamten Abend. Du sammelst Punkte, verbindest dich nebenbei mit anderen Kunden und erspielst dir MMS® Club Preise. Kein Leistungsdruck — die Games sind dafür da, dass man leicht in den Abend reinkommt.',
+        a: 'Die Penthouse Games sind unser Turnier über den gesamten Abend. Du sammelst Punkte, connectest dich nebenbei mit den anderen und erspielst dir MMS® Club Preise. Kein Leistungsdruck — alles easygoing: Die Games sind dafür da, gemeinsam was zu spielen und sich dabei kennenzulernen.',
         first: true },
       { q: 'Was ist die MMS® Club Card?',
         a: 'Dein personalisiertes Invite, das per Post zu dir nach Hause kommt. Die physische MMS® Club Card ist dein Einlass zum Event — und damit sammelst du bei den Penthouse Games deine Punkte.' },
