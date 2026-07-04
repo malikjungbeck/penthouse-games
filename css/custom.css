@@ -156,10 +156,10 @@ html.pg-js.pg-handover-done .deckblatt [data-atom="image"] img {
 /* ---------- Scroll-Reveals ---------- */
 html.pg-js [data-pg-reveal] {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(16px);
   transition:
-    opacity 900ms var(--pg-ease),
-    transform 900ms var(--pg-ease);
+    opacity 600ms var(--pg-ease),
+    transform 600ms var(--pg-ease);
   transition-delay: var(--pg-delay, 0ms);
   will-change: opacity, transform;
 }
@@ -339,14 +339,18 @@ a.pg-award-textlink,
 /* ---------- Timeline Progress ---------- */
 .pg-timeline-line {
   position: absolute;
-  top: 0;
+  top: var(--pg-line-top, 0px);
   left: 50%;
   width: 2px;
-  height: calc(var(--pg-progress, 0) * 100%);
+  height: calc(var(--pg-progress, 0) * var(--pg-line-max, 100%));
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.25));
   transform: translateX(-50%);
   pointer-events: none;
-  z-index: 2;
+  z-index: 0; /* hinter den Icon-Boxen */
+}
+/* Icon-Boxen liegen über der Linie */
+section.timeline .con-kit-component-icon__border {
+  z-index: 1;
 }
 
 /* ---------- Timeline mobil: einspaltig, Linie links ----------
@@ -501,4 +505,28 @@ a.pg-award-textlink,
   .pg-fold__seats {
     font-size: 18px;
   }
+}
+
+/* ---------- Footer: Lila-Flacker-GIF ---------- */
+.pg-footer-gif {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+}
+.pg-footer-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    #000 0%,
+    rgba(0, 0, 0, 0.82) 30%,
+    rgba(0, 0, 0, 0.55) 60%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
 }

@@ -152,7 +152,16 @@
   ];
   document.querySelectorAll('.con-kit-quark').forEach(function (q) {
     TEXT_PATCHES.forEach(function (p) {
-      if (q.textContent.indexOf(p[0]) !== -1) q.textContent = p[1];
+      if (q.textContent.indexOf(p[0]) === -1) return;
+      // Farb-Span erhalten (traegt --alpha-text 0.5) — sonst wird der Text vollweiss
+      var colorSpan = q.querySelector('span.con-kit-quark-color');
+      if (colorSpan) {
+        colorSpan.textContent = p[1];
+        q.innerHTML = '';
+        q.appendChild(colorSpan);
+      } else {
+        q.textContent = p[1];
+      }
     });
   });
 
@@ -302,23 +311,36 @@
     if (foundersCol) foundersCol.classList.add('pg-first-mobile');
   }
 
-  // ==== Scroll-Reveals (gestaffelt, scroll-basiert — robust ohne IO) ====
+  // ==== Scroll-Reveals (IntersectionObserver, gestaffelt) ====
   document.querySelectorAll('.con-kit-animation__atom, .con-kit-component-list-item-accordion').forEach(function (el) {
     el.setAttribute('data-pg-reveal', '');
   });
-  // Stagger: Delay nach Position innerhalb der gemeinsamen Row
+  // Stagger: kurzer Versatz innerhalb der gemeinsamen Row — snappy, nicht träge
   document.querySelectorAll('.con-kit-row').forEach(function (row) {
     row.querySelectorAll('[data-pg-reveal]').forEach(function (el, i) {
-      el.style.setProperty('--pg-delay', Math.min(i * 90, 540) + 'ms');
+      el.style.setProperty('--pg-delay', Math.min(i * 60, 240) + 'ms');
     });
   });
   var pending = Array.prototype.slice.call(document.querySelectorAll('[data-pg-reveal]'));
+  var revealObserver = null;
+  if ('IntersectionObserver' in window) {
+    revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('pg-in');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0 });
+    pending.forEach(function (el) { revealObserver.observe(el); });
+  }
+  // Fallback/Absicherung (initialer Zustand, alte Browser)
   var checkReveals = function () {
     if (!pending.length) return;
-    var limit = window.innerHeight * 0.92;
+    var limit = window.innerHeight * 0.94;
     pending = pending.filter(function (el) {
       if (el.getBoundingClientRect().top < limit) {
         el.classList.add('pg-in');
+        if (revealObserver) revealObserver.unobserve(el);
         return false;
       }
       return true;
@@ -359,12 +381,38 @@
   };
 
   // ==== Timeline Progress-Linie ====
+  // Läuft von der Mitte des ersten Icons bis zur Mitte des letzten — hinter den Icon-Boxen.
   var tlContainer = document.querySelector('.con-kit-component-grid-timeline__container');
   if (tlContainer) {
     var line = document.createElement('div');
     line.className = 'pg-timeline-line';
     tlContainer.style.setProperty('--pg-progress', '0');
     tlContainer.appendChild(line);
+    var sizeTimelineLine = function () {
+      var iconBoxes = tlContainer.querySelectorAll('.con-kit-component-icon');
+      if (iconBoxes.length < 2) return;
+      var cRect = tlContainer.getBoundingClientRect();
+      var first = iconBoxes[0].getBoundingClientRect();
+      var last = iconBoxes[iconBoxes.length - 1].getBoundingClientRect();
+      line.style.setProperty('--pg-line-top', Math.round(first.top + first.height / 2 - cRect.top) + 'px');
+      line.style.setProperty('--pg-line-max', Math.round((last.top + last.height / 2) - (first.top + first.height / 2)) + 'px');
+    };
+    sizeTimelineLine();
+    window.addEventListener('load', sizeTimelineLine);
+    window.addEventListener('resize', function () { setTimeout(sizeTimelineLine, 200); });
+  }
+
+  // ==== Footer: Lila-Flacker-GIF als Hintergrund ====
+  var footBg = document.querySelector('section.fußzeile .con-kit-organism-background');
+  if (footBg) {
+    var footGif = document.createElement('img');
+    footGif.src = 'assets/deckblatt-bg-neu.gif';
+    footGif.alt = '';
+    footGif.setAttribute('aria-hidden', 'true');
+    footGif.setAttribute('decoding', 'async');
+    footGif.className = 'pg-footer-gif';
+    footBg.appendChild(footGif);
+    footBg.classList.add('pg-footer-bg');
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
