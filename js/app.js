@@ -178,12 +178,13 @@
     var fakt4 = exAtom.cloneNode(true);
     fakt4.removeAttribute('data-id');
     var fakt4Q = fakt4.querySelector('.con-kit-quark');
-    if (fakt4Q) fakt4Q.textContent = 'Limitiert auf 100 Tickets.';
-    var fakt4Line = exLine.cloneNode(true);
-    fakt4Line.removeAttribute('data-id');
-    var nachLine = exLine.nextElementSibling;
-    exLine.parentElement.insertBefore(fakt4, nachLine);
-    exLine.parentElement.insertBefore(fakt4Line, nachLine);
+    if (fakt4Q) fakt4Q.textContent = 'Limitiert auf 100 Tickets';
+    // Als Trenner eine NORMALE Zwischenlinie klonen (nicht die Abschluss-Linie),
+    // und vor der Abschluss-Linie einfuegen — so bleiben alle Abstaende gleich.
+    var zwischenLine = (exAtom.previousElementSibling || exLine).cloneNode(true);
+    zwischenLine.removeAttribute('data-id');
+    exLine.parentElement.insertBefore(zwischenLine, exLine);
+    exLine.parentElement.insertBefore(fakt4, exLine);
   }
 
   // A3: Untere Kachel-Reihe wird [Food & Drinks | MMS® Club Preise | Dummgehen].
@@ -438,6 +439,9 @@
       var last = iconBoxes[iconBoxes.length - 1].getBoundingClientRect();
       line.style.top = Math.round(first.top + first.height / 2 - cRect.top) + 'px';
       tlLineMaxPx = Math.round((last.top + last.height / 2) - (first.top + first.height / 2));
+      // Höhe sofort synchron setzen — unabhängig vom rAF-Scroll-Handler
+      var tp0 = Math.min(1, Math.max(0, (window.innerHeight * 0.7 - cRect.top) / cRect.height));
+      line.style.height = Math.round(tp0 * tlLineMaxPx) + 'px';
     };
     sizeTimelineLine();
     window.addEventListener('load', sizeTimelineLine);
@@ -459,6 +463,10 @@
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
+  document.addEventListener('visibilitychange', function () {
+    ticking = false; // rAF friert in Hintergrund-Tabs ein — Flag loesen
+    onScroll();
+  });
   onScroll();
   // Initiale Reveals absichern (auch wenn rAF/Scroll noch nicht gefeuert haben)
   setTimeout(checkReveals, 150);
