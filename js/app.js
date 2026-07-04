@@ -96,9 +96,9 @@
         '<span>München</span><span class="pg-dot"></span>' +
         '<span>17:00 – 03:00</span>' +
       '</div>' +
-      '<div class="pg-fold__seats">' + seatsText + '</div>' +
       '<div class="pg-countdown" id="pg-countdown"></div>' +
-      '<a class="pg-fold__cta" href="' + TICKET_URL + '" target="_blank" rel="noopener">Jetzt Ticket sichern</a>';
+      '<a class="pg-fold__cta" href="' + TICKET_URL + '" target="_blank" rel="noopener">Jetzt Ticket sichern</a>' +
+      '<div class="pg-fold__seats">' + seatsText + '</div>';
     deckImage.parentNode.insertBefore(fold, deckImage.nextSibling);
   }
 

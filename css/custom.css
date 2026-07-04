@@ -409,10 +409,14 @@ html.pg-js .deckblatt [data-atom="image"].pg-in img {
 }
 
 /* Header "always wins" ragt mobil über den Rand (Original-Bug) — zurückschieben.
-   `translate` statt `transform`, damit das Reveal-CSS (transform:none) nicht kollidiert. */
+   `translate` statt `transform`, damit das Reveal-CSS (transform:none) nicht kollidiert.
+   Logo zusätzlich kappen, damit es nicht mit "always wins" kollidiert. */
 @media (max-width: 640px) {
   .kopfzeile [data-atom="link-group"] {
     translate: -32px 0;
+  }
+  .kopfzeile .con-kit-component-logo__image {
+    width: min(48vw, 190px) !important;
   }
 }
 
