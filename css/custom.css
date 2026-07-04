@@ -214,11 +214,14 @@ html.pg-js .deckblatt [data-atom="image"].pg-in img {
   background: rgba(255, 255, 255, 0.45);
 }
 .pg-fold__seats {
+  /* exakt wie die Eyebrow-Zeile "Exklusiv für MMS® Kunden:" */
   font-family: var(--pg-font);
-  font-size: 17px;
-  letter-spacing: 0.04em;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 24px;
   text-transform: none;
-  color: rgba(255, 255, 255, 0.85);
+  color: #fff;
 }
 .pg-countdown {
   display: flex;
@@ -501,9 +504,6 @@ section.timeline .con-kit-component-icon__border {
   .pg-fold__meta {
     font-size: 12px;
     gap: 10px;
-  }
-  .pg-fold__seats {
-    font-size: 18px;
   }
 }
 
