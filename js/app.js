@@ -422,6 +422,42 @@
     });
   };
 
+  // ==== Timeline: 4. Punkt "Aftermovie" (das fehlende ♣ — die vierte Kartenfarbe) ====
+  var tlItems = document.querySelectorAll('.con-kit-component-grid-timeline__item');
+  if (tlItems.length === 3) {
+    var afterItem = tlItems[1].cloneNode(true); // linkes Item als Vorlage (Zickzack)
+    afterItem.removeAttribute('data-id');
+    afterItem.querySelectorAll('[data-id]').forEach(function (n) { n.removeAttribute('data-id'); });
+    var afterKopf = afterItem.querySelector('.con-kit-component-header .con-kit-quark');
+    if (afterKopf) afterKopf.textContent = 'Aftermovie';
+    var afterAbsatz = null;
+    afterItem.querySelectorAll('.con-kit-quark-paragraph').forEach(function (q) {
+      if (q.textContent.length > 40) afterAbsatz = q;
+    });
+    if (afterAbsatz) {
+      var afterSpan = afterAbsatz.querySelector('span.con-kit-quark-color');
+      var afterZiel = afterSpan || afterAbsatz;
+      afterZiel.textContent = 'Rund drei Wochen nach dem Event erscheint das Aftermovie. Wer da war, erlebt den Abend nochmal — wer nicht da war, sieht genau, was er verpasst hat.';
+      if (afterSpan) { afterAbsatz.innerHTML = ''; afterAbsatz.appendChild(afterSpan); }
+    }
+    // Herz-Pfad durch Kreuz (♣) ersetzen — gleicher Stroke-Stil wie ♠ ♥ ♦
+    var afterSvgPath = afterItem.querySelector('.con-kit-component-icon svg path');
+    if (afterSvgPath) {
+      afterSvgPath.setAttribute('d',
+        'M10.5 4.7a2.5 2.5 0 1 0-5 0 2.5 2.5 0 1 0 5 0Z' +
+        'M7.5 9.2a2.5 2.5 0 1 0-5 0 2.5 2.5 0 1 0 5 0Z' +
+        'M13.5 9.2a2.5 2.5 0 1 0-5 0 2.5 2.5 0 1 0 5 0Z' +
+        'M8 11.6V14.2M6.2 14.2h3.6');
+    }
+    // Der Klon entsteht nach der Reveal-Registrierung — direkt sichtbar schalten,
+    // sonst bleibt er dauerhaft auf opacity 0
+    afterItem.classList.add('pg-in');
+    afterItem.querySelectorAll('[data-pg-reveal]').forEach(function (n) { n.classList.add('pg-in'); });
+    // Vor der Progress-Linie einfuegen -> 4. Item, Zickzack bleibt (links)
+    var tlLineEl = tlItems[2].parentElement.querySelector('.pg-timeline-line');
+    tlItems[2].parentElement.insertBefore(afterItem, tlLineEl);
+  }
+
   // ==== Timeline Progress-Linie ====
   // Läuft von der Mitte des ersten Icons bis zur Mitte des letzten — hinter den Icon-Boxen.
   var tlLineMaxPx = 0;
