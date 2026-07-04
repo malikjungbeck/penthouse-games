@@ -12,23 +12,50 @@
   document.documentElement.classList.add('pg-js');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ==== Preloader ====
+  // ==== Preloader mit Übergabe ins Hero-Logo ====
   var preloader = document.getElementById('pg-preloader');
   if (preloader) {
+    var pImg = preloader.querySelector('img');
+    var handoverDone = false;
+    var release = function () {
+      // Hero-Logo freigeben (ohne erneutes Write-on) und Preloader entfernen
+      document.documentElement.classList.add('pg-handover-done');
+    };
     var hide = function () {
+      if (handoverDone) return;
+      handoverDone = true;
+      release();
       preloader.classList.add('pg-done');
       setTimeout(function () { preloader.remove(); }, 900);
     };
-    // Mindestens die Write-on-Animation zeigen, maximal 2.2s warten
+    var handover = function () {
+      if (handoverDone) return;
+      var heroImg = document.querySelector('.deckblatt [data-atom="image"] img');
+      if (reduceMotion || !pImg || !heroImg || scrollY > 40) { hide(); return; }
+      var to = heroImg.getBoundingClientRect();
+      var from = pImg.getBoundingClientRect();
+      // Nur übergeben, wenn das Hero-Logo im ersten Viewport messbar ist
+      if (to.width < 10 || to.top < 0 || to.bottom > innerHeight) { hide(); return; }
+      handoverDone = true;
+      preloader.classList.add('pg-handover');
+      pImg.style.transformOrigin = 'top left';
+      pImg.style.transform = 'translate(' + (to.left - from.left) + 'px,' +
+        (to.top - from.top) + 'px) scale(' + (to.width / from.width) + ')';
+      setTimeout(function () {
+        release();
+        preloader.remove();
+      }, 980);
+    };
+    // Warten bis Write-on fertig ist (150ms Delay + 1300ms) und die Seite geladen hat
     var minShown = reduceMotion ? 0 : 1500;
     var t0 = performance.now();
     var onReady = function () {
       var rest = Math.max(0, minShown - (performance.now() - t0));
-      setTimeout(hide, rest);
+      setTimeout(handover, rest);
     };
     if (document.readyState === 'complete') onReady();
     else window.addEventListener('load', onReady);
-    setTimeout(hide, 2600); // Fail-safe
+    setTimeout(hide, 3200); // Fail-safe: nie länger blockieren
   }
 
   // ==== FAQ / Listen-Accordions ====

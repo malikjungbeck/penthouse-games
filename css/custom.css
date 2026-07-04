@@ -93,7 +93,7 @@ body {
   );
 }
 
-/* ---------- Preloader ---------- */
+/* ---------- Preloader mit Übergabe ins Hero-Logo ---------- */
 #pg-preloader {
   position: fixed;
   inset: 0;
@@ -102,15 +102,22 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 700ms var(--pg-ease), visibility 700ms;
+  transition: opacity 700ms var(--pg-ease), visibility 700ms, background-color 900ms var(--pg-ease);
 }
 #pg-preloader.pg-done {
   opacity: 0;
   visibility: hidden;
 }
+/* Übergabe-Phase: Hintergrund gibt die Seite frei, Logo fliegt zur Hero-Position */
+#pg-preloader.pg-handover {
+  background-color: transparent;
+  pointer-events: none;
+}
 #pg-preloader img {
   width: min(64vw, 560px);
   height: auto;
+  transition: transform 950ms var(--pg-ease);
+  will-change: transform;
   -webkit-mask-image: linear-gradient(105deg, #000 42%, transparent 58%);
   mask-image: linear-gradient(105deg, #000 42%, transparent 58%);
   -webkit-mask-size: 300% 100%;
@@ -118,6 +125,17 @@ body {
   -webkit-mask-position: 100% 0;
   mask-position: 100% 0;
   animation: pg-writeon 1300ms var(--pg-ease) 150ms forwards;
+}
+/* Hero-Logo bleibt verborgen, bis der Preloader übergeben hat —
+   danach sichtbar ohne erneutes Write-on */
+html.pg-js:not(.pg-handover-done) .deckblatt [data-atom="image"] img {
+  visibility: hidden;
+}
+html.pg-js.pg-handover-done .deckblatt [data-atom="image"] img {
+  visibility: visible;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  animation: none !important;
 }
 @keyframes pg-writeon {
   to {
