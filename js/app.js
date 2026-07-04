@@ -128,7 +128,7 @@
   // Texte, die im HTML durch Formatierungs-Spans zerstückelt sind — per DOM ersetzen.
   var TEXT_PATCHES = [
     ['No fucks given',
-     'Zieh dir was Schickes an, aber lass den Dreiteiler zu Hause. Ziel sollte es sein, dass du mit einem coolen Fit kommst: schick, aber casual. Hier ein paar Fotos als Inspiration für dein Outfit und den Mood des Abends.'],
+     'Zieh dir was Schickes an, aber lass den Dreiteiler zu Hause. Ziel sollte es sein, dass du mit einem coolen Fit kommst: schick, aber casual.\n\nDer Abend wird gefilmt — und das Aftermovie schaut man sich auch in ein paar Jahren noch an. Also zieh dich so an, dass du dich darauf gerne wiedersiehst. Die Fotos zeigen den Vibe, die Punkte darunter geben dir konkrete Ideen.'],
     ['Nach dem Kauf kommt dein personalisierter',
      'Nach dem Kauf kommt dein personalisiertes Ticket mit allen wichtigen Infos per Post. Außerdem erhältst du deine MMS® Club Card. Sie ist dein Einlass zum Event und mit ihr sammelst du Punkte, um dir die MMS® Club Preise zu erspielen.'],
     ['tryzuharden',
