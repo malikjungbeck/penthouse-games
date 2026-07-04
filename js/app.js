@@ -128,7 +128,7 @@
   // Texte, die im HTML durch Formatierungs-Spans zerstückelt sind — per DOM ersetzen.
   var TEXT_PATCHES = [
     ['No fucks given',
-     'Zieh dir was Schickes an, aber lass den Dreiteiler zu Hause. Ziel sollte es sein, dass du mit einem coolen Fit kommst: schick, aber casual. Anbei ein paar Fotos als Inspiration für dein Outfit und den Mood des Abends.'],
+     'Zieh dir was Schickes an, aber lass den Dreiteiler zu Hause. Ziel sollte es sein, dass du mit einem coolen Fit kommst: schick, aber casual. Hier ein paar Fotos als Inspiration für dein Outfit und den Mood des Abends.'],
     ['Nach dem Kauf kommt dein personalisierter',
      'Nach dem Kauf kommt dein personalisiertes Ticket mit allen wichtigen Infos per Post. Außerdem erhältst du deine MMS® Club Card. Sie ist dein Einlass zum Event und mit ihr sammelst du Punkte, um dir die MMS® Club Preise zu erspielen.'],
     ['tryzuharden',
@@ -153,6 +153,16 @@
       return true;
     });
   });
+
+  // Timeline "Ticket sichern": Du-Form statt Plural (Konsistenz mit dem Rest der Seite)
+  var ticketQ = Array.prototype.find.call(document.querySelectorAll('.con-kit-quark'), function (q) {
+    return q.textContent.indexOf('Sichert euch über den Button eure Tickets') !== -1;
+  });
+  if (ticketQ) {
+    var ticketZiel = ticketQ.querySelector('span.con-kit-quark-color') || ticketQ;
+    ticketZiel.textContent = ticketZiel.textContent
+      .replace('Sichert euch über den Button eure Tickets', 'Sicher dir über den Button dein Ticket');
+  }
 
   // Award-FAQ: "Sommerfest"-Relikt fixen + Formular-Link anhängen
   var awardFaqQ = Array.prototype.find.call(document.querySelectorAll('.con-kit-quark'), function (q) {
