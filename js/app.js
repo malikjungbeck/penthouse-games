@@ -109,6 +109,10 @@
     });
   });
 
+  // Mood-CTA: Label "Tickets sichern"
+  var moodCta = document.querySelector('section.mood [data-id^="c27f5290"] .con-kit-component-button__label');
+  if (moodCta) moodCta.textContent = 'Tickets sichern';
+
   // Timeline "Ticket sichern": Du-Form statt Plural (Konsistenz mit dem Rest der Seite)
   var ticketQ = Array.prototype.find.call(document.querySelectorAll('.con-kit-quark'), function (q) {
     return q.textContent.indexOf('Sichert euch über den Button eure Tickets') !== -1;
