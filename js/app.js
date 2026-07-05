@@ -316,6 +316,17 @@
     else window.addEventListener('load', setupMarquee);
   }
 
+  // Mood: zweite Galerie in die erste mergen — einheitliches 8px-Masonry-Raster
+  var mg1 = document.querySelector('section.mood [data-id^="e5561201"] .con-kit-component-masonry');
+  var mg2Atom = document.querySelector('section.mood [data-id^="c02f1732"]');
+  var mg2 = mg2Atom ? mg2Atom.querySelector('.con-kit-component-masonry') : null;
+  if (mg1 && mg2 && mg1.children.length === mg2.children.length) {
+    Array.prototype.forEach.call(mg2.children, function (col, i) {
+      while (col.firstChild) mg1.children[i].appendChild(col.firstChild);
+    });
+    mg2Atom.style.display = 'none';
+  }
+
   // ==== "MMS® always wins.": mobil Founders-Foto oben statt Rooftop ====
   var foundersImg = document.querySelector('[data-id^="ca294597"]');
   if (foundersImg) {
