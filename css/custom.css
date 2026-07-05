@@ -92,13 +92,12 @@ section.deckblatt .con-kit-frame {
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) 42%,
-    rgba(0, 0, 0, 0.13) 56%,
-    rgba(0, 0, 0, 0.38) 67%,
-    rgba(0, 0, 0, 0.64) 76%,
-    rgba(0, 0, 0, 0.84) 84%,
-    rgba(0, 0, 0, 0.95) 91%,
-    #000 97%
+    rgba(0, 0, 0, 0) 38%,
+    rgba(0, 0, 0, 0.2) 52%,
+    rgba(0, 0, 0, 0.45) 62%,
+    rgba(0, 0, 0, 0.7) 72%,
+    rgba(0, 0, 0, 0.9) 80%,
+    #000 88%
   );
 }
 
