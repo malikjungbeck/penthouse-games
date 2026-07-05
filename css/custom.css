@@ -635,3 +635,8 @@ section.deckblatt .con-kit-organism-background1 {
     justify-content: center; /* mobil: vertikal mittig, linksbündig */
   }
 }
+
+/* Mood: Ticket-Button entfernt (CTA-Dichte — Einleitung/Timeline/Footer tragen die CTAs) */
+section.mood [data-id^="c27f5290"] {
+  display: none !important;
+}
