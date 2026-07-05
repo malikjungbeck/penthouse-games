@@ -636,3 +636,26 @@ section.deckblatt .con-kit-organism-background1 {
   }
 }
 
+
+/* Fakten-Linien: konsistente 1px-Linien statt 5px-SVG-Verläufen
+   (Subpixel-Rendering machte einzelne Linien optisch dicker) */
+section.einleitung .con-kit-atom-line svg {
+  visibility: hidden;
+}
+section.einleitung .con-kit-atom-line {
+  position: relative;
+}
+section.einleitung .con-kit-atom-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Mood: Ticket-Button raus */
+section.mood [data-id^="c27f5290"] {
+  display: none !important;
+}
