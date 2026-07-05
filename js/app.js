@@ -81,7 +81,7 @@
     ['verrückte MMS® Club Merch',
      'Endlich ist es soweit: Das erste MMS® Club Event. Die Community wächst wie verrückt und wir sind täglich online im Austausch über Socials, Chats und Calls. Jetzt ist es an der Zeit, endlich uns alle in Person an einem Ort zusammenzubringen.\n\nMach dich bereit für einen geilen Abend, um dich mit Menschen wie dir zu connecten, das MMS® Team in Person kennenzulernen, eine gute Zeit zu haben und gemeinsam dumm zu gehen.'],
     ['Chats gewachsen. Zeit, sie endlich',
-     'An alle, die innerhalb der MMS®-Betreuung erstmals 10.000, 100.000 oder 1.000.000 € erreicht haben: Bei diesem Fest übergeben wir die ersten MMS® Awards jemals.']
+     'Wir möchten unser Team gewinnen sehen. Dich. Uns. Alle Kunden. Unsere Mission ist es, die geilste Community in Deutschland aufzubauen.']
   ];
   document.querySelectorAll('.con-kit-quark').forEach(function (q) {
     TEXT_PATCHES.some(function (p) {
@@ -269,6 +269,13 @@
     var awardMolecule = preiseAtom.closest('.con-kit-molecule-textBlock');
     if (awardMolecule) awardMolecule.classList.add('pg-award-mobile-last');
   }
+
+  // Slider-Sektion: Überschrift zurück zu "MMS® always wins"
+  var sliderHead = Array.prototype.find.call(
+    document.querySelectorAll('section.slider- .con-kit-component-header .con-kit-quark'),
+    function (h) { return h.textContent.trim() === 'MMS® Awardzeremonie'; }
+  );
+  if (sliderHead) sliderHead.textContent = 'MMS® always wins';
 
   // Footer: "always wins" wird zum Mission-Statement
   var footerAlways = Array.prototype.find.call(
