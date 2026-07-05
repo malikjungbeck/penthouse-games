@@ -73,7 +73,7 @@
   // Texte, die im HTML durch Formatierungs-Spans zerstückelt sind — per DOM ersetzen.
   var TEXT_PATCHES = [
     ['No fucks given',
-     'Zieh dir was Schickes an, aber lass den Dreiteiler zu Hause. Ziel sollte es sein, dass du mit einem coolen Fit kommst: schick, aber casual.\n\nDer Abend wird gefilmt — und das Aftermovie schaut man sich auch in ein paar Jahren noch an. Also zieh dich so an, dass du dich darauf gerne wiedersiehst. Die Fotos zeigen den Vibe, die Punkte darunter geben dir konkrete Ideen.'],
+     'Zieh dir was Schickes an, aber lass den Dreiteiler zu Hause. Ziel sollte es sein, dass du mit einem coolen Fit kommst: schick, aber casual.\n\nDer Abend wird gefilmt — und das Aftermovie schaut man sich auch in ein paar Jahren noch an. Also zieh dich so an, dass du dich darauf gerne wiedersiehst. Die Fotos zeigen den Vibe.'],
     ['Nach dem Kauf kommt dein personalisierter',
      'Nach dem Kauf kommt dein personalisiertes Ticket mit allen wichtigen Infos per Post. Außerdem erhältst du deine MMS® Club Card. Sie ist dein Einlass zum Event und mit ihr sammelst du Punkte, um dir die MMS® Club Preise zu erspielen.'],
     ['tryzuharden',
@@ -206,25 +206,9 @@
     if (b.textContent.indexOf('Award jetzt beantragen') === -1) return;
     var label = b.querySelector('.con-kit-component-button__label');
     if (label) label.textContent = 'Award beantragen';
-    (b.closest('a') || b).classList.add('pg-award-textlink');
-    b.classList.add('pg-award-textlink');
+    
   });
 
-  // A6b: Location-Hint als dritte Checklisten-Zeile (nach dem Mood-Umzug oben)
-  var inviteRow = document.querySelector('section.mood [data-id^="5133c8f8"]');
-  var lastChkLine = document.querySelector('section.mood [data-id^="4676d0d3"]');
-  if (inviteRow && lastChkLine && lastChkLine.parentElement) {
-    var locLine = lastChkLine.cloneNode(true);
-    locLine.removeAttribute('data-id');
-    var locRow = inviteRow.cloneNode(true);
-    locRow.removeAttribute('data-id');
-    var locQuark = locRow.querySelector('.con-kit-quark');
-    if (locQuark) locQuark.textContent = 'Was wir nicht wollen: dreckige Jogginghosen — aber auch keine Dreiteiler';
-    lastChkLine.parentElement.insertBefore(locLine, lastChkLine);
-    lastChkLine.parentElement.insertBefore(locRow, lastChkLine);
-  }
-
-  // B: Neue FAQ-Einträge (geklont vom ersten Accordion-Item)
   // Geklont wird der grid-list-item-WRAPPER (eine Zeile), nicht das Accordion selbst
   var faqFirstAcc = document.querySelector('section.faq .con-kit-component-list-item-accordion');
   var faqTemplate = faqFirstAcc && faqFirstAcc.closest('.con-kit-component-grid-list-item');

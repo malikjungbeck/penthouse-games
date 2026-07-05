@@ -268,29 +268,6 @@ html.pg-js .deckblatt [data-atom="image"].pg-in img {
   color: #000;
 }
 
-/* ---------- Award-Link: dezenter Textlink statt Button ---------- */
-a.pg-award-textlink,
-.pg-award-textlink.con-kit-component-button,
-.pg-award-textlink .con-kit-component-button {
-  border: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-}
-.pg-award-textlink .con-kit-component-button__label {
-  font-size: 15px;
-  opacity: 0.7;
-  text-decoration: underline;
-  text-underline-offset: 5px;
-  transition: opacity 300ms var(--pg-ease);
-}
-.pg-award-textlink:hover .con-kit-component-button__label {
-  opacity: 1;
-}
-.pg-award-textlink::after {
-  display: none !important; /* kein Glint-Sweep auf dem Textlink */
-}
-
 /* ---------- Button-Glint (bestehende CTAs) ---------- */
 .con-kit-component-button,
 .pg-fold__cta {
@@ -618,5 +595,43 @@ section.mood [data-id^="cb12c019"] {
 @media (max-width: 640px) {
   .deckblatt [data-atom="image"] {
     max-width: 92% !important;
+  }
+}
+
+/* Kachel-Reihen: Desktop-Abstand halbiert (Spacer 184 -> 92) */
+@media (min-width: 641px) {
+  section.hero .con-kit-molecule-textBlock .con-kit-component-spacer,
+  section.hero .con-kit-molecule-textBlock .con-kit-component-spacer__handler {
+    max-height: 92px !important;
+  }
+}
+
+/* Mood: Checkliste unter der Galerie entfernt */
+section.mood [data-id^="b27ba295"],
+section.mood [data-id^="af4b4149"],
+section.mood [data-id^="79dd9320"],
+section.mood [data-id^="5133c8f8"],
+section.mood [data-id^="4676d0d3"] {
+  display: none !important;
+}
+
+/* Hero mobil: vertikal mittig, weiterhin linksbuendig */
+@media (max-width: 640px) {
+  section.deckblatt {
+    justify-content: center;
+  }
+}
+
+/* Hero-Hintergrund: Container muss die volle Viewport-Höhe spannen,
+   sonst schrumpft das GIF auf Content-Höhe (sichtbare Oberkante) */
+section.deckblatt .con-kit-organism-background1 {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+@media (max-width: 640px) {
+  section.deckblatt .con-kit-organism-background1 {
+    justify-content: center; /* mobil: vertikal mittig, linksbündig */
   }
 }
