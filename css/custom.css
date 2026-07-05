@@ -34,7 +34,7 @@ body {
 /* Eyebrow "Exklusiv für MMS® Kunden:" mittig über dem Logo */
 .deckblatt [data-atom="plain-text"],
 .deckblatt [data-atom="plain-text"] .con-kit-quark {
-  text-align: center !important;
+  text-align: left !important;
 }
 
 /* Hero: das Script-Logo sitzt exakt in der Bildschirmmitte, der Rest
@@ -44,14 +44,14 @@ section.deckblatt {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-end; /* Logo + Eyebrow unten links wie eine Überschrift */
 }
 section.deckblatt [data-atom="line"] {
   display: none !important; /* beide unsichtbaren Pull-down-Füller */
 }
 section.deckblatt .con-kit-frame {
-  padding-top: var(--pg-hero-pad, 12px) !important;
-  padding-bottom: 64px !important;
+  padding-top: 12px !important;
+  padding-bottom: 72px !important;
 }
 
 /* ---------- Film-Grain + Vignette ---------- */
@@ -605,4 +605,18 @@ section.hero [data-id^="b70aa9aa"] {
 /* Award-Bild aus der Mood-Galerie entfernt — es lebt jetzt gross in der Awardzeremonie-Sektion */
 section.mood [data-id^="cb12c019"] {
   display: none !important;
+}
+
+/* Hero-Logo: unten links, Überschriften-Größe */
+.deckblatt [data-atom="image"] {
+  max-width: min(58vw, 880px) !important;
+  margin-right: auto !important;
+}
+.deckblatt [data-atom="image"] img {
+  width: 100%;
+}
+@media (max-width: 640px) {
+  .deckblatt [data-atom="image"] {
+    max-width: 92% !important;
+  }
 }

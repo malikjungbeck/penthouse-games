@@ -58,31 +58,6 @@
     setTimeout(hide, 3200); // Fail-safe: nie länger blockieren
   }
 
-  // ==== Hero: Script-Logo exakt in die Bildschirmmitte setzen ====
-  var heroFrame = document.querySelector('section.deckblatt .con-kit-frame');
-  var centerHeroLogo = function () {
-    if (!heroFrame) return;
-    var img = document.querySelector('.deckblatt [data-atom="image"]');
-    if (!img) return;
-    // Iterativ vom aktuellen Padding aus korrigieren — selbstheilend,
-    // auch wenn sich das Layout nach dem ersten Durchlauf noch setzt.
-    for (var i = 0; i < 3; i++) {
-      var r = img.getBoundingClientRect();
-      var delta = Math.round(window.innerHeight / 2 - (r.top + window.scrollY + r.height / 2));
-      if (Math.abs(delta) < 2) break;
-      var current = parseFloat(heroFrame.style.getPropertyValue('--pg-hero-pad')) || 12;
-      heroFrame.style.setProperty('--pg-hero-pad', Math.max(12, current + delta) + 'px');
-    }
-  };
-  centerHeroLogo();
-  window.addEventListener('load', centerHeroLogo);
-  window.addEventListener('load', function () { setTimeout(centerHeroLogo, 600); });
-  var resizeTimer;
-  window.addEventListener('resize', function () {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(centerHeroLogo, 150);
-  });
-
   // ==== Sanftes Anker-Scrolling ====
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) {
@@ -93,36 +68,6 @@
       }
     });
   });
-
-  // ==== Fold-Info + Countdown ins Deckblatt ====
-  var deckImage = document.querySelector('.deckblatt [data-atom="image"]');
-  if (deckImage) {
-    var fold = document.createElement('div');
-    fold.className = 'pg-fold';
-    fold.setAttribute('data-pg-reveal', '');
-    fold.innerHTML =
-      '<div class="pg-countdown" id="pg-countdown"></div>' +
-      '<a class="pg-fold__cta" href="' + TICKET_URL + '" target="_blank" rel="noopener">Jetzt Ticket sichern</a>';
-    deckImage.parentNode.insertBefore(fold, deckImage.nextSibling);
-  }
-
-  var cdEl = document.getElementById('pg-countdown');
-  if (cdEl) {
-    var UNITS = [['Tage', 86400000], ['Std', 3600000], ['Min', 60000], ['Sek', 1000]];
-    var render = function () {
-      var diff = Math.max(0, EVENT_DATE - Date.now());
-      var html = '';
-      UNITS.forEach(function (u) {
-        var v = Math.floor(diff / u[1]);
-        diff -= v * u[1];
-        html += '<div class="pg-countdown__unit"><span class="pg-countdown__num">' +
-          String(v).padStart(2, '0') + '</span><span class="pg-countdown__label">' + u[0] + '</span></div>';
-      });
-      cdEl.innerHTML = html;
-    };
-    render();
-    setInterval(render, 1000);
-  }
 
   // ==== Inhalts-Patches (Änderungspaket 04.07.2026) ====
   // Texte, die im HTML durch Formatierungs-Spans zerstückelt sind — per DOM ersetzen.
