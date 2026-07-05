@@ -725,6 +725,6 @@ img.pg-bg-video {
     justify-content: flex-end;
   }
   section.deckblatt .con-kit-frame {
-    padding-bottom: calc(25svh + 10px) !important;
+    padding-bottom: calc(17svh) !important;
   }
 }
