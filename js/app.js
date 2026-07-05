@@ -185,7 +185,7 @@
     var alignBottomRow = function () {
       // untere Reihe nach dem Tausch: Food & Drinks | Awardzeremonie | Dummgehen
       var heads = [d, f, award].filter(Boolean);
-      if (window.innerWidth <= 640) {
+      if (window.innerWidth <= 1080) {
         heads.forEach(function (h) { h.style.marginTop = ''; });
         return;
       }
@@ -196,6 +196,9 @@
         if (delta > 1) h.style.marginTop = delta + 'px';
       });
     };
+    // Kachel-Layout markieren (fuer Zwischengroessen-Stapelung per CSS)
+    var tilesLayout = col1.closest('.con-kit-molecule-textBlock');
+    if (tilesLayout && tilesLayout.parentElement) tilesLayout.parentElement.classList.add('pg-tiles-layout');
     alignBottomRow();
     window.addEventListener('load', alignBottomRow);
     window.addEventListener('resize', function () { setTimeout(alignBottomRow, 200); });
